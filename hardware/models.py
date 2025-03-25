@@ -34,6 +34,11 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from decimal import Decimal
 
+from django.contrib.auth.models import User
+import qrcode
+from io import BytesIO
+from django.core.files import File
+
 class Inventory(models.Model):
     STATUS_CHOICES = [
         ('available', 'Disponível'),
@@ -41,6 +46,13 @@ class Inventory(models.Model):
         ('maintenance', 'Em Manutenção'),
         ('reserved', 'Reservado'),
         ('discontinued', 'Descontinuado')
+    ]
+    
+    PRIORITY_CHOICES = [
+        ('low', 'Baixa'),
+        ('medium', 'Média'),
+        ('high', 'Alta'),
+        ('critical', 'Crítica')
     ]
     
     name = models.CharField(max_length=255, verbose_name='Nome')
@@ -75,6 +87,30 @@ class Inventory(models.Model):
     warranty_expiration = models.DateField(null=True, blank=True, verbose_name='Vencimento da Garantia')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
+    barcode = models.CharField(max_length=100, unique=True, blank=True, null=True, verbose_name='Código de Barras')
+    qr_code = models.ImageField(upload_to='qrcodes/', blank=True, null=True, verbose_name='QR Code')
+    maintenance_interval = models.IntegerField(default=180, verbose_name='Intervalo de Manutenção (dias)')
+    last_maintenance = models.DateField(null=True, blank=True, verbose_name='Última Manutenção')
+    next_maintenance = models.DateField(null=True, blank=True, verbose_name='Próxima Manutenção')
+    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='low', verbose_name='Prioridade')
+    
+    def save(self, *args, **kwargs):
+        if not self.barcode:
+            self.barcode = f"INV-{self.id if self.id else 0:06d}"
+            
+        if not self.qr_code:
+            qr = qrcode.QRCode(version=1, box_size=10, border=5)
+            qr.add_data(self.barcode)
+            qr.make(fit=True)
+            img = qr.make_image(fill_color="black", back_color="white")
+            
+            buffer = BytesIO()
+            img.save(buffer, format='PNG')
+            filename = f'qr_{self.barcode}.png'
+            
+            self.qr_code.save(filename, File(buffer), save=False)
+            
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return self.name
@@ -89,3 +125,21 @@ class AccessLog(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.timestamp}"
+class InventoryHistory(models.Model):
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='history')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    action = models.CharField(max_length=50)
+    old_status = models.CharField(max_length=50, blank=True, null=True)
+    new_status = models.CharField(max_length=50, blank=True, null=True)
+    old_quantity = models.IntegerField(null=True)
+    new_quantity = models.IntegerField(null=True)
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Histórico de Inventário"
+        verbose_name_plural = "Históricos de Inventário"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.inventory.name} - {self.action} - {self.created_at}"
