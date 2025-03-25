@@ -193,25 +193,25 @@ class InventoryMovement(models.Model):
         # Registra histórico detalhado da movimentação
         super().save(*args, **kwargs)
         
-        action_description = f"{self.get_movement_type_display()} - De: {self.previous_location} Para: {self.current_location}"
-        
         InventoryHistory.objects.create(
             inventory=self.inventory,
             user=self.moved_by,
-            action=self.movement_type,
+            action='moved',
             old_status=self.inventory.status,
             new_status=self.status,
-            notes=f"""
-            Tipo: {self.get_movement_type_display()}
-            Status: {self.get_status_display()}
-            Responsável: {self.responsible_person}
-            Contato: {self.contact_info}
-            De: {self.previous_location}
-            Para: {self.current_location}
-            Data Prevista Retorno: {self.expected_return_date or 'N/A'}
-            Data Real Retorno: {self.actual_return_date or 'N/A'}
-            Observações: {self.notes}
-            """
+            old_location=self.previous_location,
+            new_location=self.current_location,
+            responsible_person=self.responsible_person,
+            document_reference=self.document.name if self.document else '',
+            notes=self.notes,
+            details={
+                'movement_type': self.get_movement_type_display(),
+                'status': self.get_status_display(),
+                'contact_info': self.contact_info,
+                'expected_return_date': str(self.expected_return_date) if self.expected_return_date else None,
+                'actual_return_date': str(self.actual_return_date) if self.actual_return_date else None,
+                'loan_days': self.get_loan_days() if self.movement_type == 'loan' else None
+            }
         )
 
     def __str__(self):

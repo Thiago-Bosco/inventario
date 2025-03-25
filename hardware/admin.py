@@ -181,4 +181,22 @@ class InventoryAdmin(InventoryAdmin):
         super().save_model(request, obj, form, change)
 
 admin.site.register(AccessLog, AccessLogAdmin)
+
+class InventoryHistoryAdmin(admin.ModelAdmin):
+    list_display = ('inventory', 'action_display', 'user', 'responsible_person', 'location_changes', 'created_at')
+    list_filter = ('action', 'user', 'created_at')
+    search_fields = ('inventory__name', 'notes', 'responsible_person')
+    readonly_fields = ('created_at', 'user')
+    
+    def action_display(self, obj):
+        return obj.get_action_display()
+    action_display.short_description = 'Ação'
+    
+    def location_changes(self, obj):
+        if obj.old_location and obj.new_location:
+            return f"{obj.old_location} → {obj.new_location}"
+        return "-"
+    location_changes.short_description = 'Mudança de Local'
+
+admin.site.register(InventoryHistory, InventoryHistoryAdmin)
 admin.site.register(InventoryMovement, InventoryMovementAdmin)
