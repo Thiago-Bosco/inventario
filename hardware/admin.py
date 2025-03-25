@@ -60,26 +60,45 @@ class InventoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
     readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
 
-    fieldsets = [
+    fieldsets = (
         ('Informações Básicas', {
-            'fields': ['name', 'description', 'image', 'barcode', 'qr_code']
+            'fields': ('name', 'description', 'image', 'barcode', 'qr_code'),
+            'classes': ('collapse',),
         }),
         ('Quantidade e Valor', {
-            'fields': ['quantity', 'minimum_quantity', 'unit_price']
+            'fields': ('quantity', 'minimum_quantity', 'unit_price'),
+            'classes': ('collapse',),
         }),
         ('Localização e Status', {
-            'fields': ['location', 'status', 'supplier', 'category']
+            'fields': ('location', 'status', 'supplier', 'category'),
+            'classes': ('collapse',),
         }),
         ('Informações Adicionais', {
-            'fields': ['notes', 'warranty_expiration']
+            'fields': ('notes', 'warranty_expiration'),
+            'classes': ('collapse',),
         }),
         ('Manutenção', {
-            'fields': ['maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority']
+            'fields': ('maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority'),
+            'classes': ('collapse',),
         }),
         ('Datas', {
-            'fields': ['created_at', 'updated_at']
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
         })
-    ]
+    )
+
+    class Media:
+        css = {
+            'all': [
+                'admin/css/forms.css',
+                'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'
+            ]
+        }
+        js = [
+            'https://code.jquery.com/jquery-3.6.0.min.js',
+            'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js',
+            'admin/js/jquery.init.js'
+        ]
 
     class Media:
         js = [
