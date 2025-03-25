@@ -111,6 +111,8 @@ class Inventory(models.Model):
     next_maintenance = models.DateField(null=True, blank=True, verbose_name='Próxima Manutenção')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='low', verbose_name='Prioridade')
     current_location = models.CharField(max_length=255, verbose_name='Localização Atual')
+    barcode = models.CharField(max_length=50, unique=True, blank=True, null=True, verbose_name='Código de Barras')
+    qr_code = models.ImageField(upload_to='qrcodes/', blank=True, null=True, verbose_name='QR Code')
     
     def save(self, *args, **kwargs):
         if self.last_maintenance and not self.next_maintenance and self.maintenance_interval:

@@ -57,7 +57,7 @@ class InventoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'formatted_quantity', 'formatted_price', 'category', 'status_colored', 'priority', 'next_maintenance', 'supplier', 'location')
     list_filter = ('category', 'status', 'priority', 'location', 'supplier')
     search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
-    readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
+    readonly_fields = ('created_at', 'updated_at')
 
     fieldsets = (
         ('Informações do Item', {
