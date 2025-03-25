@@ -61,30 +61,16 @@ class InventoryAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
 
     fieldsets = (
-        ('Informações Básicas', {
-            'fields': ('name', 'description', 'image', 'barcode', 'qr_code'),
-            'classes': ('collapse',),
+        ('Informações do Item', {
+            'fields': (
+                'name', 'description', 'image', 'barcode', 'qr_code',
+                'quantity', 'minimum_quantity', 'unit_price',
+                'location', 'status', 'supplier', 'category',
+                'notes', 'warranty_expiration',
+                'maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority',
+                'created_at', 'updated_at'
+            )
         }),
-        ('Quantidade e Valor', {
-            'fields': ('quantity', 'minimum_quantity', 'unit_price'),
-            'classes': ('collapse',),
-        }),
-        ('Localização e Status', {
-            'fields': ('location', 'status', 'supplier', 'category'),
-            'classes': ('collapse',),
-        }),
-        ('Informações Adicionais', {
-            'fields': ('notes', 'warranty_expiration'),
-            'classes': ('collapse',),
-        }),
-        ('Manutenção', {
-            'fields': ('maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority'),
-            'classes': ('collapse',),
-        }),
-        ('Datas', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',),
-        })
     )
 
     class Media:
