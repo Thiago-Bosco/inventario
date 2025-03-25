@@ -156,12 +156,27 @@ class InventoryMovementInline(admin.TabularInline):
         return False
 
 class InventoryMovementAdmin(admin.ModelAdmin):
-    list_display = ('inventory', 'previous_location', 'current_location', 'moved_by', 'moved_at', 'notes')
-    list_filter = ('moved_by', 'moved_at', 'current_location', 'previous_location')
-    search_fields = ('inventory__name', 'previous_location', 'current_location', 'notes')
+    list_display = ('inventory', 'movement_type', 'responsible_person', 'previous_location', 'current_location', 'moved_by', 'moved_at', 'expected_return_date')
+    list_filter = ('movement_type', 'moved_by', 'moved_at', 'current_location', 'previous_location')
+    search_fields = ('inventory__name', 'previous_location', 'current_location', 'notes', 'responsible_person', 'contact_info')
     readonly_fields = ('moved_at', 'moved_by', 'previous_location')
     date_hierarchy = 'moved_at'
     ordering = ('-moved_at',)
+    
+    fieldsets = (
+        ('Informações Básicas', {
+            'fields': ('inventory', 'movement_type', 'responsible_person', 'contact_info')
+        }),
+        ('Localização', {
+            'fields': ('previous_location', 'current_location')
+        }),
+        ('Datas', {
+            'fields': ('moved_at', 'expected_return_date')
+        }),
+        ('Responsabilidade', {
+            'fields': ('moved_by', 'notes')
+        }),
+    )
 
 class InventoryAdmin(InventoryAdmin):
     inlines = [InventoryMovementInline]

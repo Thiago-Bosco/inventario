@@ -148,11 +148,22 @@ class Inventory(models.Model):
         verbose_name_plural = "Inventories"
 
 class InventoryMovement(models.Model):
+    MOVEMENT_TYPE_CHOICES = [
+        ('transfer', 'Transferência'),
+        ('loan', 'Empréstimo'),
+        ('maintenance', 'Manutenção'),
+        ('return', 'Devolução'),
+    ]
+
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='movements', verbose_name='Item')
+    movement_type = models.CharField(max_length=20, choices=MOVEMENT_TYPE_CHOICES, default='transfer', verbose_name='Tipo de Movimentação')
     previous_location = models.CharField(max_length=255, verbose_name='Localização Anterior')
     current_location = models.CharField(max_length=255, verbose_name='Nova Localização')
     moved_by = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, verbose_name='Movido por')
     moved_at = models.DateTimeField(auto_now_add=True, verbose_name='Data da Movimentação')
+    expected_return_date = models.DateField(null=True, blank=True, verbose_name='Data Prevista de Retorno')
+    responsible_person = models.CharField(max_length=255, verbose_name='Pessoa Responsável')
+    contact_info = models.CharField(max_length=255, blank=True, verbose_name='Informação de Contato')
     notes = models.TextField(blank=True, verbose_name='Observações')
 
     def __str__(self):
