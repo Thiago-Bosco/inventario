@@ -106,26 +106,15 @@ class Inventory(models.Model):
     warranty_expiration = models.DateField(null=True, blank=True, verbose_name='Vencimento da Garantia')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Atualizado em')
-    barcode = models.CharField(max_length=100, unique=True, blank=True, null=True, verbose_name='Código de Barras')
-    qr_code = models.ImageField(upload_to='qrcodes/', blank=True, null=True, verbose_name='QR Code')
     maintenance_interval = models.IntegerField(default=180, verbose_name='Intervalo de Manutenção (dias)')
     last_maintenance = models.DateField(null=True, blank=True, verbose_name='Última Manutenção')
     next_maintenance = models.DateField(null=True, blank=True, verbose_name='Próxima Manutenção')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='low', verbose_name='Prioridade')
+    current_location = models.CharField(max_length=255, verbose_name='Localização Atual')
     
     def save(self, *args, **kwargs):
-        # Gerar código de barras se não existir
-        if not self.barcode:
-            self.barcode = f"INV-{self.id if self.id else 0:06d}"
-        
-        # Calcular próxima manutenção se necessário
         if self.last_maintenance and not self.next_maintenance and self.maintenance_interval:
             self.next_maintenance = self.last_maintenance + timezone.timedelta(days=self.maintenance_interval)
-            
-        # Gerar QR code se não existir
-        if not self.qr_code:
-            qr = qrcode.QRCode(version=1, box_size=10, border=5)
-            qr.add_data(self.barcode)
             qr.make(fit=True)
             img = qr.make_image(fill_color="black", back_color="white")
             
@@ -171,3 +160,25 @@ class InventoryHistory(models.Model):
 
     def __str__(self):
         return f"{self.inventory.name} - {self.action} - {self.created_at}"
+class InventoryMovement(models.Model):
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='movements')
+    previous_location = models.CharField(max_length=255, verbose_name='Localização Anterior')
+    new_location = models.CharField(max_length=255, verbose_name='Nova Localização')
+    moved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Movido por')
+    moved_at = models.DateTimeField(auto_now_add=True, verbose_name='Data da Movimentação')
+    notes = models.TextField(blank=True, verbose_name='Observações')
+
+    class Meta:
+        verbose_name = 'Movimentação de Inventário'
+        verbose_name_plural = 'Movimentações de Inventário'
+        ordering = ['-moved_at']
+
+    def __str__(self):
+        return f"{self.inventory.name} - {self.previous_location} -> {self.new_location}"
+
+    def save(self, *args, **kwargs):
+        if not self.previous_location:
+            self.previous_location = self.inventory.current_location
+        self.inventory.current_location = self.new_location
+        self.inventory.save()
+        super().save(*args, **kwargs)
