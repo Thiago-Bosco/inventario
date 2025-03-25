@@ -45,9 +45,14 @@ from django.utils.html import format_html
 from django.contrib import admin, messages
 from decimal import Decimal
 
-def marcar_disponivel(modeladmin, request, queryset):
-    queryset.update(status='available')
-marcar_disponivel.short_description = "Marcar itens como Disponível"
+def toggle_status(modeladmin, request, queryset):
+    for item in queryset:
+        if item.status == 'disponivel':
+            item.status = 'em_uso'
+        else:
+            item.status = 'disponivel'
+        item.save()
+toggle_status.short_description = "Alternar Status (Disponível/Em Uso)"
 
 def marcar_manutencao(modeladmin, request, queryset):
     queryset.update(status='maintenance')
@@ -55,6 +60,7 @@ marcar_manutencao.short_description = "Marcar itens para Manutenção"
 
 class InventoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'formatted_quantity', 'formatted_price', 'category', 'status_colored', 'priority', 'next_maintenance', 'supplier', 'location')
+    actions = [toggle_status]
     list_filter = ('category', 'status', 'priority', 'location', 'supplier')
     search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
     readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
