@@ -216,6 +216,7 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
             'fields': ['created_at', 'user']
         }),
     ]
+    fields = [
         'inventory', 'action', 'responsible_person',
         'old_status', 'new_status',
         'old_quantity', 'new_quantity',
