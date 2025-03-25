@@ -94,6 +94,7 @@ class InventoryAdmin(admin.ModelAdmin):
             'fields': ['notes', 'created_at', 'updated_at']
         }),
     ]
+    fields = [
         'name', 'description', 'image', 'barcode', 'qr_code',
         'quantity', 'minimum_quantity', 'unit_price',
         'location', 'status', 'supplier', 'category',
