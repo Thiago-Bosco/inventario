@@ -1,0 +1,50 @@
+NoReverseMatch at /home/
+'admin' is not a registered namespace
+Request Method:	GET
+Request URL:	http://62cfeebe-a3b7-41c4-90b2-a2ac4b9bf219-00-1dpj16lcxguww.kirk.replit.dev/home/
+Django Version:	5.1.7
+Exception Type:	NoReverseMatch
+Exception Value:	
+'admin' is not a registered namespace
+Exception Location:	/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/urls/base.py, line 82, in reverse
+Raised during:	jobs.views.search_jobs
+Python Executable:	/home/runner/workspace/.pythonlibs/bin/python3
+Python Version:	3.12.7
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python312.zip',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Mon, 24 Mar 2025 16:03:18 -0300
+Error during template rendering
+In template /home/runner/workspace/jobs/templates/jobs/index.html, error at line 22
+
+'admin' is not a registered namespace
+12	    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+13	</head>
+14	<body>
+15	    <div class="d-flex">
+16	        <nav class="sidebar" id="sidebar">
+17	            <div class="sidebar-header">
+18	            </div>
+19	            <ul class="sidebar-menu">
+20	                <li><a href="{% url 'search_jobs' %}"><i class="fas fa-home"></i> Home</a></li>
+21	                <li><a href="{% url 'dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+22	                <li><a href="{% url 'admin:index' %}"><i class="fas fa-user-cog"></i> Admin</a></li>
+23	                <li><a href="{% url 'all_servers' %}"><i class="fas fa-server"></i> Servers C&C</a></li>
+24	                <li><a href="{% url 'all_FastShop' %}"><i class="fas fa-server"></i> Servers Fast</a></li>
+25	                <li><a href="{% url 'hard' %}"><i class="fas fa-microchip"></i> Hardware</a></li>
+26	                <li><a href="{% url 'all_jobs' %}"><i class="fas fa-table"></i> TWS</a></li>
+27	                <li><a href="{% url 'ajuda' %}"><i class="fas fa-question-circle"></i> Ajuda</a></li>
+28	            </ul>
+29	            <div class="sidebar-footer"> 
+30	                <form action="{% url 'logout' %}" method="post">
+31	                    {% csrf_token %}
+32	                    <button type="submit" class="btn btn-outline-danger" aria-label="Logout">
+Traceback Switch to copy-and-paste view

@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-tasks text-primary"></i> Jobs</h5>
+                <p class="card-text">Gerencie todos os jobs do sistema.</p>
+                <a href="/admin/jobs/job/" class="btn btn-primary">Acessar Jobs</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-box text-success"></i> Inventário</h5>
+                <p class="card-text">Controle o inventário de equipamentos.</p>
+                <a href="/admin/hardware/inventory/" class="btn btn-success">Acessar Inventário</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-server text-info"></i> Servidores</h5>
+                <p class="card-text">Gerencie os servidores do sistema.</p>
+                <a href="/admin/servidores/servidores_cc/" class="btn btn-info">Acessar Servidores</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

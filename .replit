@@ -1,0 +1,28 @@
+modules = ["python-3.12", "nodejs-20", "web", "c-clang14"]
+run = "run = \"python main.py\""
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "run = \"python main.py\""]
+
+[workflows]
+runButton = "Django"
+
+[[workflows.workflow]]
+name = "Django"
+author = 40830006
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python manage.py collectstatic --noinput"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python manage.py runserver 0.0.0.0:8000"
+
+[[ports]]
+localPort = 8000
+externalPort = 80
