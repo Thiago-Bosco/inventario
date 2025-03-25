@@ -67,23 +67,23 @@ class InventoryAdmin(admin.ModelAdmin):
         }),
         ('Quantidade e Valor', {
             'fields': ['quantity', 'minimum_quantity', 'unit_price'],
-            'classes': ['collapse']
+            'classes': ['wide']
         }),
         ('Localização e Status', {
             'fields': ['location', 'status', 'supplier', 'category'],
-            'classes': ['collapse']
+            'classes': ['wide']
         }),
         ('Informações Adicionais', {
             'fields': ['notes', 'warranty_expiration'],
-            'classes': ['collapse']
+            'classes': ['wide']
         }),
         ('Manutenção', {
             'fields': ['maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority'],
-            'classes': ['collapse']
+            'classes': ['wide']
         }),
         ('Datas', {
             'fields': ['created_at', 'updated_at'],
-            'classes': ['collapse']
+            'classes': ['wide']
         })
     ]
 
