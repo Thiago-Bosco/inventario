@@ -32,11 +32,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
-    'adf8b2e5-1f9a-48d7-a603-8de8ed09a7ca-00-vpldmq947zqv.picard.replit.dev'
+    'b1c0bddc-ccbd-4ab4-9e9a-f79df475a673-00-oyihaunb4cvx.worf.replit.dev'
 ]  # Allow all hosts in development
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://adf8b2e5-1f9a-48d7-a603-8de8ed09a7ca-00-vpldmq947zqv.picard.replit.dev'
+    'https://b1c0bddc-ccbd-4ab4-9e9a-f79df475a673-00-oyihaunb4cvx.worf.replit.dev'
 ]
 
 
