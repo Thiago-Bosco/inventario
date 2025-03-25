@@ -58,14 +58,33 @@ class Inventory(models.Model):
     name = models.CharField(max_length=255, verbose_name='Nome')
     
     def clean(self):
+        # Validações de quantidade
         if self.quantity < 0:
             raise ValidationError({'quantity': 'A quantidade não pode ser negativa.'})
         if self.minimum_quantity < 0:
             raise ValidationError({'minimum_quantity': 'A quantidade mínima não pode ser negativa.'})
+        if self.minimum_quantity > self.quantity:
+            raise ValidationError({'minimum_quantity': 'A quantidade mínima não pode ser maior que a quantidade atual.'})
+
+        # Validações de preço
         if self.unit_price and self.unit_price < Decimal('0.00'):
             raise ValidationError({'unit_price': 'O preço unitário não pode ser negativo.'})
+            
+        # Validações de datas
         if self.warranty_expiration and self.warranty_expiration < timezone.now().date():
             raise ValidationError({'warranty_expiration': 'A data de vencimento da garantia não pode estar no passado.'})
+            
+        # Validações de manutenção
+        if self.last_maintenance and self.next_maintenance:
+            if self.last_maintenance > self.next_maintenance:
+                raise ValidationError({'next_maintenance': 'A próxima manutenção deve ser depois da última manutenção.'})
+            
+        if self.next_maintenance and self.next_maintenance < timezone.now().date():
+            raise ValidationError({'next_maintenance': 'A data da próxima manutenção não pode estar no passado.'})
+            
+        # Validação de código de barras
+        if self.barcode and not self.barcode.startswith('INV-'):
+            raise ValidationError({'barcode': 'O código de barras deve começar com "INV-"'})
             
     def get_total_value(self):
         if self.quantity and self.unit_price:
@@ -95,9 +114,15 @@ class Inventory(models.Model):
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='low', verbose_name='Prioridade')
     
     def save(self, *args, **kwargs):
+        # Gerar código de barras se não existir
         if not self.barcode:
             self.barcode = f"INV-{self.id if self.id else 0:06d}"
+        
+        # Calcular próxima manutenção se necessário
+        if self.last_maintenance and not self.next_maintenance and self.maintenance_interval:
+            self.next_maintenance = self.last_maintenance + timezone.timedelta(days=self.maintenance_interval)
             
+        # Gerar QR code se não existir
         if not self.qr_code:
             qr = qrcode.QRCode(version=1, box_size=10, border=5)
             qr.add_data(self.barcode)
@@ -109,6 +134,9 @@ class Inventory(models.Model):
             filename = f'qr_{self.barcode}.png'
             
             self.qr_code.save(filename, File(buffer), save=False)
+        
+        # Validar dados antes de salvar    
+        self.full_clean()
             
         super().save(*args, **kwargs)
     
