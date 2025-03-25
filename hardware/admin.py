@@ -65,18 +65,14 @@ class InventoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
     readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
 
-    fieldsets = (
-        ('Informações do Item', {
-            'fields': (
-                'name', 'description', 'image', 'barcode', 'qr_code',
-                'quantity', 'minimum_quantity', 'unit_price',
-                'location', 'status', 'supplier', 'category',
-                'notes', 'warranty_expiration',
-                'maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority',
-                'created_at', 'updated_at'
-            )
-        }),
-    )
+    fields = [
+        'name', 'description', 'image', 'barcode', 'qr_code',
+        'quantity', 'minimum_quantity', 'unit_price',
+        'location', 'status', 'supplier', 'category',
+        'notes', 'warranty_expiration',
+        'maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority',
+        'created_at', 'updated_at'
+    ]
 
     class Media:
         css = {
@@ -164,27 +160,14 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
     list_per_page = 20
     save_on_top = True
 
-    fieldsets = (
-        ('Informações Básicas', {
-            'fields': ('inventory', 'action', 'responsible_person')
-        }),
-        ('Status', {
-            'fields': ('old_status', 'new_status')
-        }),
-        ('Quantidade', {
-            'fields': ('old_quantity', 'new_quantity')
-        }),
-        ('Localização', {
-            'fields': ('old_location', 'new_location')
-        }),
-        ('Detalhes Adicionais', {
-            'fields': ('document_reference', 'notes', 'details')
-        }),
-        ('Informações do Sistema', {
-            'fields': ('created_at', 'user'),
-            'classes': ('collapse',)
-        })
-    )
+    fields = [
+        'inventory', 'action', 'responsible_person',
+        'old_status', 'new_status',
+        'old_quantity', 'new_quantity',
+        'old_location', 'new_location',
+        'document_reference', 'notes', 'details',
+        'created_at', 'user'
+    ]
 
     def quantity_changes(self, obj):
         if obj.old_quantity is not None and obj.new_quantity is not None:
