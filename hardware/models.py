@@ -110,7 +110,7 @@ class Inventory(models.Model):
     last_maintenance = models.DateField(null=True, blank=True, verbose_name='Última Manutenção')
     next_maintenance = models.DateField(null=True, blank=True, verbose_name='Próxima Manutenção')
     priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='low', verbose_name='Prioridade')
-    current_location = models.CharField(max_length=255, verbose_name='Localização Atual')
+    current_location = models.CharField(max_length=255, verbose_name='Localização Atual', blank=True, null=True)
     barcode = models.CharField(max_length=50, unique=True, blank=True, null=True, verbose_name='Código de Barras')
     qr_code = models.ImageField(upload_to='qrcodes/', blank=True, null=True, verbose_name='QR Code')
     
