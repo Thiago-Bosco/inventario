@@ -258,5 +258,18 @@ class InventoryHistory(models.Model):
         verbose_name_plural = "Históricos de Inventário"
         ordering = ['-created_at']
 
+    def clean(self):
+        if self.action == 'moved' and not (self.old_location and self.new_location):
+            raise ValidationError('Localizações antiga e nova são necessárias para movimentação')
+        if self.action == 'updated' and not (self.old_quantity is not None and self.new_quantity is not None):
+            raise ValidationError('Quantidades antiga e nova são necessárias para atualização')
+            
+    def get_change_description(self):
+        if self.action == 'moved':
+            return f"Movido de {self.old_location} para {self.new_location}"
+        elif self.action == 'updated':
+            return f"Quantidade alterada de {self.old_quantity} para {self.new_quantity}"
+        return self.get_action_display()
+            
     def __str__(self):
         return f"{self.inventory.name} - {self.action} - {self.created_at}"

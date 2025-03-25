@@ -183,9 +183,18 @@ class InventoryAdmin(InventoryAdmin):
 admin.site.register(AccessLog, AccessLogAdmin)
 
 class InventoryHistoryAdmin(admin.ModelAdmin):
-    list_display = ('inventory', 'action_display', 'user', 'responsible_person', 'location_changes', 'created_at')
-    list_filter = ('action', 'user', 'created_at')
-    search_fields = ('inventory__name', 'notes', 'responsible_person')
+    list_display = ('inventory', 'action_display', 'user', 'responsible_person', 'location_changes', 'quantity_changes', 'created_at')
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
+    
+    def quantity_changes(self, obj):
+        if obj.old_quantity is not None and obj.new_quantity is not None:
+            return f"{obj.old_quantity} → {obj.new_quantity}"
+        return "-"
+    quantity_changes.short_description = 'Mudança de Quantidade'
+    list_filter = ('action', 'user', 'created_at', 'inventory__category')
+    search_fields = ('inventory__name', 'notes', 'responsible_person', 'old_location', 'new_location')
+    autocomplete_fields = ['inventory']
     readonly_fields = ('created_at', 'user')
     
     def action_display(self, obj):
