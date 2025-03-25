@@ -114,8 +114,10 @@ class InventoryAdmin(admin.ModelAdmin):
     def formatted_price(self, obj):
         if obj.unit_price:
             total = obj.get_total_value()
-            return format_html('R$ {:.2f}<br/><small>Total: R$ {:.2f}</small>', 
-                             obj.unit_price, total)
+            return format_html(
+                'R$ {:.2f}<br/><small>Total: R$ {:.2f}</small>', 
+                float(obj.unit_price), float(total)
+            )
         return '-'
     formatted_price.short_description = "Preço Un./Total"
 
