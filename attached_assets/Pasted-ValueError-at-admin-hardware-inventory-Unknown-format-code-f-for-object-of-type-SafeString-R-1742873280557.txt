@@ -1,0 +1,42 @@
+ValueError at /admin/hardware/inventory/
+Unknown format code 'f' for object of type 'SafeString'
+Request Method:	GET
+Request URL:	http://adf8b2e5-1f9a-48d7-a603-8de8ed09a7ca-00-vpldmq947zqv.picard.replit.dev/admin/hardware/inventory/
+Django Version:	5.1.7
+Exception Type:	ValueError
+Exception Value:	
+Unknown format code 'f' for object of type 'SafeString'
+Exception Location:	/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/utils/html.py, line 142, in format_html
+Raised during:	django.contrib.admin.options.changelist_view
+Python Executable:	/home/runner/workspace/.pythonlibs/bin/python
+Python Version:	3.12.7
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python312.zip',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Tue, 25 Mar 2025 00:27:51 -0300
+Error during template rendering
+In template /home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/jazzmin/templates/admin/change_list.html, error at line 86
+
+Unknown format code 'f' for object of type 'SafeString'
+76	                            {% endif %}
+77	
+78	                            {% block result_list %}
+79	                                <div class="change-list-actions row pb-3">
+80	                                    <div class="col-12">
+81	                                        {% if action_form and actions_on_top and cl.show_admin_actions %}
+82	                                            {% admin_actions %}
+83	                                        {% endif %}
+84	                                    </div>
+85	                                </div>
+86	                                {% result_list cl %}
+87	                                {% if action_form and actions_on_bottom and cl.show_admin_actions %}
+88	                                    <div class="row">
+89	                                        <div class="col-12">
