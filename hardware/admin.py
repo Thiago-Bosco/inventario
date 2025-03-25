@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.contrib import messages
-from .models import Hardware, AccessLog, Inventory, InventoryMovement, InventoryHistory
+from .models import Hardware, AccessLog, Inventory, InventoryHistory
 
 def marcar_manutencao(modeladmin, request, queryset):
     queryset.update(status_contrato='Em Manutenção')
@@ -146,40 +146,6 @@ class InventoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Inventory, InventoryAdmin)
 admin.site.register(Hardware, HardwareAdmin)
-class InventoryMovementInline(admin.TabularInline):
-    model = InventoryMovement
-    extra = 0
-    readonly_fields = ('moved_at', 'moved_by', 'previous_location')
-    can_delete = False
-
-    def has_add_permission(self, request, obj=None):
-        return False
-
-class InventoryMovementAdmin(admin.ModelAdmin):
-    list_display = ('inventory', 'movement_type', 'responsible_person', 'previous_location', 'current_location', 'moved_by', 'moved_at', 'expected_return_date')
-    list_filter = ('movement_type', 'moved_by', 'moved_at', 'current_location', 'previous_location')
-    search_fields = ('inventory__name', 'previous_location', 'current_location', 'notes', 'responsible_person', 'contact_info')
-    readonly_fields = ('moved_at', 'moved_by', 'previous_location')
-    date_hierarchy = 'moved_at'
-    ordering = ('-moved_at',)
-    
-    fields = ('inventory', 'movement_type', 'responsible_person', 'contact_info', 
-              'previous_location', 'current_location', 'moved_at', 'expected_return_date',
-              'moved_by', 'notes')
-
-class InventoryAdmin(InventoryAdmin):
-    inlines = [InventoryMovementInline]
-
-    def save_model(self, request, obj, form, change):
-        if change and 'location' in form.changed_data:
-            InventoryMovement.objects.create(
-                inventory=obj,
-                previous_location=Inventory.objects.get(pk=obj.pk).location,
-                current_location=obj.location,
-                moved_by=request.user
-            )
-        super().save_model(request, obj, form, change)
-
 admin.site.register(AccessLog, AccessLogAdmin)
 
 class InventoryHistoryAdmin(admin.ModelAdmin):
@@ -208,4 +174,3 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
     location_changes.short_description = 'Mudança de Local'
 
 admin.site.register(InventoryHistory, InventoryHistoryAdmin)
-admin.site.register(InventoryMovement, InventoryMovementAdmin)
