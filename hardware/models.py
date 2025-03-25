@@ -229,15 +229,29 @@ class AccessLog(models.Model):
     def __str__(self):
         return f"{self.user} - {self.timestamp}"
 class InventoryHistory(models.Model):
+    ACTION_CHOICES = [
+        ('created', 'Criado'),
+        ('updated', 'Atualizado'),
+        ('moved', 'Movido'),
+        ('maintenance', 'Em Manutenção'),
+        ('returned', 'Retornado'),
+        ('deleted', 'Deletado')
+    ]
+    
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='history')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    action = models.CharField(max_length=50)
+    action = models.CharField(max_length=50, choices=ACTION_CHOICES)
     old_status = models.CharField(max_length=50, blank=True, null=True)
     new_status = models.CharField(max_length=50, blank=True, null=True)
     old_quantity = models.IntegerField(null=True)
     new_quantity = models.IntegerField(null=True)
+    old_location = models.CharField(max_length=255, blank=True, null=True)
+    new_location = models.CharField(max_length=255, blank=True, null=True)
+    responsible_person = models.CharField(max_length=255, blank=True)
+    document_reference = models.CharField(max_length=100, blank=True)
     notes = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    details = models.JSONField(default=dict, blank=True)
 
     class Meta:
         verbose_name = "Histórico de Inventário"
