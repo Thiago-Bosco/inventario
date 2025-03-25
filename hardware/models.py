@@ -189,6 +189,31 @@ class InventoryMovement(models.Model):
             return (end_date - self.moved_at.date()).days
         return 0
 
+    def save(self, *args, **kwargs):
+        # Registra histórico detalhado da movimentação
+        super().save(*args, **kwargs)
+        
+        action_description = f"{self.get_movement_type_display()} - De: {self.previous_location} Para: {self.current_location}"
+        
+        InventoryHistory.objects.create(
+            inventory=self.inventory,
+            user=self.moved_by,
+            action=self.movement_type,
+            old_status=self.inventory.status,
+            new_status=self.status,
+            notes=f"""
+            Tipo: {self.get_movement_type_display()}
+            Status: {self.get_status_display()}
+            Responsável: {self.responsible_person}
+            Contato: {self.contact_info}
+            De: {self.previous_location}
+            Para: {self.current_location}
+            Data Prevista Retorno: {self.expected_return_date or 'N/A'}
+            Data Real Retorno: {self.actual_return_date or 'N/A'}
+            Observações: {self.notes}
+            """
+        )
+
     def __str__(self):
         return f"{self.inventory.name} - {self.previous_location} → {self.current_location}"
 
