@@ -62,35 +62,36 @@ class InventoryAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ('Informações Básicas', {
-            'fields': ['name', 'description', 'image', 'barcode', 'qr_code'],
-            'classes': ['wide']
+            'fields': ['name', 'description', 'image', 'barcode', 'qr_code']
         }),
         ('Quantidade e Valor', {
-            'fields': ['quantity', 'minimum_quantity', 'unit_price'],
-            'classes': ['wide']
+            'fields': ['quantity', 'minimum_quantity', 'unit_price']
         }),
         ('Localização e Status', {
-            'fields': ['location', 'status', 'supplier', 'category'],
-            'classes': ['wide']
+            'fields': ['location', 'status', 'supplier', 'category']
         }),
         ('Informações Adicionais', {
-            'fields': ['notes', 'warranty_expiration'],
-            'classes': ['wide']
+            'fields': ['notes', 'warranty_expiration']
         }),
         ('Manutenção', {
-            'fields': ['maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority'],
-            'classes': ['wide']
+            'fields': ['maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority']
         }),
         ('Datas', {
-            'fields': ['created_at', 'updated_at'],
-            'classes': ['wide']
+            'fields': ['created_at', 'updated_at']
         })
     ]
 
     class Media:
-        js = ['admin/js/collapse.js']
+        js = [
+            'admin/js/jquery.init.js',
+            'admin/js/collapse.js',
+            'admin/js/core.js'
+        ]
         css = {
-            'all': ['admin/css/forms.css']
+            'all': [
+                'admin/css/forms.css',
+                'admin/css/base.css'
+            ]
         }
 
     def save_model(self, request, obj, form, change):
