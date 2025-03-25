@@ -1,6 +1,7 @@
+
 from django.contrib import admin
 from django.contrib import messages
-from .models import Hardware, AccessLog, Inventory, InventoryMovement
+from .models import Hardware, AccessLog, Inventory
 
 def marcar_manutencao(modeladmin, request, queryset):
     queryset.update(status_contrato='Em Manutenção')
@@ -57,7 +58,7 @@ class InventoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'formatted_quantity', 'formatted_price', 'category', 'status_colored', 'priority', 'next_maintenance', 'supplier', 'location')
     list_filter = ('category', 'status', 'priority', 'location', 'supplier')
     search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
 
     fieldsets = (
         ('Informações do Item', {
@@ -105,20 +106,17 @@ class InventoryAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
     def formatted_quantity(self, obj):
-        base_html = "{} un."
+        html = f"{obj.quantity} un."
         if obj.is_low_stock():
-            return format_html('<span style="color: red;">{}</span>', 
-                             base_html.format(obj.quantity))
-        return format_html(base_html, obj.quantity)
+            html = f'<span style="color: red;">{html}</span>'
+        return format_html(html)
     formatted_quantity.short_description = "Quantidade"
 
     def formatted_price(self, obj):
         if obj.unit_price:
             total = obj.get_total_value()
-            return format_html(
-                'R$ {:.2f}<br/><small>Total: R$ {:.2f}</small>', 
-                float(obj.unit_price), float(total)
-            )
+            return format_html('R$ {:.2f}<br/><small>Total: R$ {:.2f}</small>', 
+                             obj.unit_price, total)
         return '-'
     formatted_price.short_description = "Preço Un./Total"
 
