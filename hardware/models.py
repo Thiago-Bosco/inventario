@@ -147,6 +147,22 @@ class Inventory(models.Model):
         verbose_name = "Inventory"
         verbose_name_plural = "Inventories"
 
+class InventoryMovement(models.Model):
+    inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='movements', verbose_name='Item')
+    previous_location = models.CharField(max_length=255, verbose_name='Localização Anterior')
+    current_location = models.CharField(max_length=255, verbose_name='Nova Localização')
+    moved_by = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, verbose_name='Movido por')
+    moved_at = models.DateTimeField(auto_now_add=True, verbose_name='Data da Movimentação')
+    notes = models.TextField(blank=True, verbose_name='Observações')
+
+    def __str__(self):
+        return f"{self.inventory.name} - {self.previous_location} → {self.current_location}"
+
+    class Meta:
+        verbose_name = "Movimentação de Inventário"
+        verbose_name_plural = "Movimentações de Inventário"
+        ordering = ['-moved_at']
+
 class AccessLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.CharField(max_length=255)

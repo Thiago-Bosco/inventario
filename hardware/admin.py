@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.contrib import messages
-from .models import Hardware, AccessLog, Inventory
+from .models import Hardware, AccessLog, Inventory, InventoryMovement
 
 def marcar_manutencao(modeladmin, request, queryset):
     queryset.update(status_contrato='Em Manutenção')
@@ -146,4 +146,33 @@ class InventoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Inventory, InventoryAdmin)
 admin.site.register(Hardware, HardwareAdmin)
+class InventoryMovementInline(admin.TabularInline):
+    model = InventoryMovement
+    extra = 0
+    readonly_fields = ('moved_at', 'moved_by', 'previous_location')
+    can_delete = False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+class InventoryMovementAdmin(admin.ModelAdmin):
+    list_display = ('inventory', 'previous_location', 'current_location', 'moved_by', 'moved_at')
+    list_filter = ('moved_by', 'moved_at', 'current_location')
+    search_fields = ('inventory__name', 'previous_location', 'current_location', 'notes')
+    readonly_fields = ('moved_at', 'moved_by', 'previous_location')
+
+class InventoryAdmin(InventoryAdmin):
+    inlines = [InventoryMovementInline]
+
+    def save_model(self, request, obj, form, change):
+        if change and 'location' in form.changed_data:
+            InventoryMovement.objects.create(
+                inventory=obj,
+                previous_location=Inventory.objects.get(pk=obj.pk).location,
+                current_location=obj.location,
+                moved_by=request.user
+            )
+        super().save_model(request, obj, form, change)
+
 admin.site.register(AccessLog, AccessLogAdmin)
+admin.site.register(InventoryMovement, InventoryMovementAdmin)
