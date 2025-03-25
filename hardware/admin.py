@@ -55,14 +55,14 @@ def marcar_manutencao(modeladmin, request, queryset):
 marcar_manutencao.short_description = "Marcar itens para Manutenção"
 
 class InventoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'formatted_quantity', 'formatted_price', 'category', 'status_colored', 'supplier', 'location', 'dias_garantia')
-    list_filter = ('category', 'status', 'location', 'supplier')
-    search_fields = ('name', 'description', 'category', 'supplier', 'notes')
-    readonly_fields = ('created_at', 'updated_at')
+    list_display = ('name', 'formatted_quantity', 'formatted_price', 'category', 'status_colored', 'priority', 'next_maintenance', 'supplier', 'location')
+    list_filter = ('category', 'status', 'priority', 'location', 'supplier')
+    search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
+    readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
 
     fieldsets = [
         ('Informações Básicas', {
-            'fields': ['name', 'description', 'image'],
+            'fields': ['name', 'description', 'image', 'barcode', 'qr_code'],
             'classes': ['wide']
         }),
         ('Quantidade e Valor', {
@@ -75,6 +75,10 @@ class InventoryAdmin(admin.ModelAdmin):
         }),
         ('Informações Adicionais', {
             'fields': ['notes', 'warranty_expiration'],
+            'classes': ['collapse']
+        }),
+        ('Manutenção', {
+            'fields': ['maintenance_interval', 'last_maintenance', 'next_maintenance', 'priority'],
             'classes': ['collapse']
         }),
         ('Datas', {
