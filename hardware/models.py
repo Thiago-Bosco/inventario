@@ -154,17 +154,40 @@ class InventoryMovement(models.Model):
         ('maintenance', 'Manutenção'),
         ('return', 'Devolução'),
     ]
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pendente'),
+        ('in_progress', 'Em Andamento'),
+        ('completed', 'Concluído'),
+        ('canceled', 'Cancelado'),
+    ]
 
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='movements', verbose_name='Item')
     movement_type = models.CharField(max_length=20, choices=MOVEMENT_TYPE_CHOICES, default='transfer', verbose_name='Tipo de Movimentação')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name='Status')
     previous_location = models.CharField(max_length=255, verbose_name='Localização Anterior')
     current_location = models.CharField(max_length=255, verbose_name='Nova Localização')
     moved_by = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True, verbose_name='Movido por')
     moved_at = models.DateTimeField(auto_now_add=True, verbose_name='Data da Movimentação')
     expected_return_date = models.DateField(null=True, blank=True, verbose_name='Data Prevista de Retorno')
+    actual_return_date = models.DateField(null=True, blank=True, verbose_name='Data Real de Retorno')
     responsible_person = models.CharField(max_length=255, verbose_name='Pessoa Responsável')
     contact_info = models.CharField(max_length=255, blank=True, verbose_name='Informação de Contato')
+    document = models.FileField(upload_to='movement_docs/', null=True, blank=True, verbose_name='Documento/Comprovante')
     notes = models.TextField(blank=True, verbose_name='Observações')
+
+    def clean(self):
+        if self.expected_return_date and self.expected_return_date < timezone.now().date():
+            raise ValidationError({'expected_return_date': 'A data prevista de retorno não pode estar no passado.'})
+        
+        if self.actual_return_date and self.actual_return_date > timezone.now().date():
+            raise ValidationError({'actual_return_date': 'A data real de retorno não pode estar no futuro.'})
+
+    def get_loan_days(self):
+        if self.movement_type == 'loan':
+            end_date = self.actual_return_date or timezone.now().date()
+            return (end_date - self.moved_at.date()).days
+        return 0
 
     def __str__(self):
         return f"{self.inventory.name} - {self.previous_location} → {self.current_location}"
