@@ -193,6 +193,12 @@ class InventoryHistory(models.Model):
             raise ValidationError('Quantidades antiga e nova são necessárias para atualização')
         if self.new_location and len(self.new_location) > 255:
             raise ValidationError('A localização não pode ter mais que 255 caracteres')
+        if self.new_quantity is not None and self.new_quantity < 0:
+            raise ValidationError('A nova quantidade não pode ser negativa')
+        if not self.responsible_person and self.action in ['movido', 'manutencao']:
+            raise ValidationError('É necessário informar um responsável para esta ação')
+        if self.action == 'manutencao' and not self.notes:
+            raise ValidationError('É necessário incluir observações para manutenção')
             
     def get_change_description(self):
         if self.action == 'moved':

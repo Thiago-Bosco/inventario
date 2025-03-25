@@ -152,6 +152,30 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
     list_display = ('inventory', 'action_display', 'user', 'responsible_person', 'location_changes', 'quantity_changes', 'created_at')
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
+    search_fields = ['inventory__name', 'responsible_person', 'notes']
+    list_filter = ['action', 'created_at', 'user']
+    readonly_fields = ['created_at', 'user']
+    fieldsets = (
+        ('Informações Básicas', {
+            'fields': ('inventory', 'action', 'responsible_person')
+        }),
+        ('Status', {
+            'fields': ('old_status', 'new_status')
+        }),
+        ('Quantidade', {
+            'fields': ('old_quantity', 'new_quantity')
+        }),
+        ('Localização', {
+            'fields': ('old_location', 'new_location')
+        }),
+        ('Detalhes Adicionais', {
+            'fields': ('document_reference', 'notes', 'details')
+        }),
+        ('Informações do Sistema', {
+            'fields': ('created_at', 'user'),
+            'classes': ('collapse',)
+        })
+    )
     
     def quantity_changes(self, obj):
         if obj.old_quantity is not None and obj.new_quantity is not None:
