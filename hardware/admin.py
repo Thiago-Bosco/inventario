@@ -163,20 +163,9 @@ class InventoryMovementAdmin(admin.ModelAdmin):
     date_hierarchy = 'moved_at'
     ordering = ('-moved_at',)
     
-    fieldsets = (
-        ('Informações Básicas', {
-            'fields': ('inventory', 'movement_type', 'responsible_person', 'contact_info')
-        }),
-        ('Localização', {
-            'fields': ('previous_location', 'current_location')
-        }),
-        ('Datas', {
-            'fields': ('moved_at', 'expected_return_date')
-        }),
-        ('Responsabilidade', {
-            'fields': ('moved_by', 'notes')
-        }),
-    )
+    fields = ('inventory', 'movement_type', 'responsible_person', 'contact_info', 
+              'previous_location', 'current_location', 'moved_at', 'expected_return_date',
+              'moved_by', 'notes')
 
 class InventoryAdmin(InventoryAdmin):
     inlines = [InventoryMovementInline]
