@@ -41,18 +41,18 @@ from django.core.files import File
 
 class Inventory(models.Model):
     STATUS_CHOICES = [
-        ('available', 'Disponível'),
-        ('in_use', 'Em Uso'),
-        ('maintenance', 'Em Manutenção'),
-        ('reserved', 'Reservado'),
-        ('discontinued', 'Descontinuado')
+        ('disponivel', 'Disponível'),
+        ('em_uso', 'Em Uso'),
+        ('manutencao', 'Em Manutenção'),
+        ('reservado', 'Reservado'),
+        ('descontinuado', 'Descontinuado')
     ]
     
     PRIORITY_CHOICES = [
-        ('low', 'Baixa'),
-        ('medium', 'Média'),
-        ('high', 'Alta'),
-        ('critical', 'Crítica')
+        ('baixa', 'Baixa'),
+        ('media', 'Média'),
+        ('alta', 'Alta'),
+        ('critica', 'Crítica')
     ]
     
     name = models.CharField(max_length=255, verbose_name='Nome')
@@ -157,12 +157,12 @@ class AccessLog(models.Model):
         return f"{self.user} - {self.timestamp}"
 class InventoryHistory(models.Model):
     ACTION_CHOICES = [
-        ('created', 'Criado'),
-        ('updated', 'Atualizado'),
-        ('moved', 'Movido'),
-        ('maintenance', 'Em Manutenção'),
-        ('returned', 'Retornado'),
-        ('deleted', 'Deletado')
+        ('criado', 'Criado'),
+        ('atualizado', 'Atualizado'),
+        ('movido', 'Movido'),
+        ('manutencao', 'Em Manutenção'),
+        ('retornado', 'Retornado'),
+        ('deletado', 'Deletado')
     ]
     
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='history')
