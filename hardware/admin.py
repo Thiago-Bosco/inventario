@@ -64,36 +64,7 @@ class InventoryAdmin(admin.ModelAdmin):
     list_filter = ('category', 'status', 'priority', 'location', 'supplier')
     search_fields = ('name', 'description', 'category', 'supplier', 'notes', 'barcode')
     readonly_fields = ('created_at', 'updated_at', 'qr_code', 'barcode')
-    list_per_page = 15
-    save_on_top = True
-    view_on_site = False
 
-    fieldsets = [
-        ('Informações Básicas', {
-            'classes': ('wide',),
-            'fields': ['name', 'description', 'image', 'category']
-        }),
-        ('Códigos', {
-            'classes': ('wide',),
-            'fields': ['barcode', 'qr_code']
-        }),
-        ('Quantidade e Valor', {
-            'classes': ('wide',),
-            'fields': ['quantity', 'minimum_quantity', 'unit_price']
-        }),
-        ('Localização e Status', {
-            'classes': ('wide',),
-            'fields': ['location', 'status', 'supplier', 'priority']
-        }),
-        ('Manutenção', {
-            'classes': ('wide',),
-            'fields': ['maintenance_interval', 'last_maintenance', 'next_maintenance', 'warranty_expiration']
-        }),
-        ('Informações Adicionais', {
-            'classes': ('wide',),
-            'fields': ['notes', 'created_at', 'updated_at']
-        }),
-    ]
     fields = [
         'name', 'description', 'image', 'barcode', 'qr_code',
         'quantity', 'minimum_quantity', 'unit_price',
@@ -186,36 +157,9 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
     search_fields = ['inventory__name', 'responsible_person', 'notes', 'old_location', 'new_location']
     list_filter = ['action', 'created_at', 'user']
     readonly_fields = ['created_at', 'user']
-    list_per_page = 15
+    list_per_page = 20
     save_on_top = True
-    view_on_site = False
 
-    fieldsets = [
-        ('Item e Ação', {
-            'classes': ('wide',),
-            'fields': ['inventory', 'action', 'responsible_person']
-        }),
-        ('Alterações de Status', {
-            'classes': ('wide',),
-            'fields': ['old_status', 'new_status']
-        }),
-        ('Alterações de Quantidade', {
-            'classes': ('wide',),
-            'fields': ['old_quantity', 'new_quantity']
-        }),
-        ('Alterações de Localização', {
-            'classes': ('wide',),
-            'fields': ['old_location', 'new_location']
-        }),
-        ('Documentação', {
-            'classes': ('wide',),
-            'fields': ['document_reference', 'notes', 'details']
-        }),
-        ('Sistema', {
-            'classes': ('wide',),
-            'fields': ['created_at', 'user']
-        }),
-    ]
     fields = [
         'inventory', 'action', 'responsible_person',
         'old_status', 'new_status',
