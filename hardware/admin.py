@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.contrib import messages
-from .models import Hardware, AccessLog, Inventory, InventoryMovement
+from .models import Hardware, AccessLog, Inventory, InventoryMovement, InventoryHistory
 
 def marcar_manutencao(modeladmin, request, queryset):
     queryset.update(status_contrato='Em Manutenção')
