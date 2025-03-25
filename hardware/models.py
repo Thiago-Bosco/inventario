@@ -45,7 +45,8 @@ class Inventory(models.Model):
         ('em_uso', 'Em Uso'),
         ('manutencao', 'Em Manutenção'),
         ('reservado', 'Reservado'),
-        ('descontinuado', 'Descontinuado')
+        ('descontinuado', 'Descontinuado'),
+        ('pendente', 'Pendente')
     ]
     
     PRIORITY_CHOICES = [
@@ -186,10 +187,12 @@ class InventoryHistory(models.Model):
         ordering = ['-created_at']
 
     def clean(self):
-        if self.action == 'moved' and not (self.old_location and self.new_location):
+        if self.action == 'movido' and not (self.old_location and self.new_location):
             raise ValidationError('Localizações antiga e nova são necessárias para movimentação')
-        if self.action == 'updated' and not (self.old_quantity is not None and self.new_quantity is not None):
+        if self.action == 'atualizado' and not (self.old_quantity is not None and self.new_quantity is not None):
             raise ValidationError('Quantidades antiga e nova são necessárias para atualização')
+        if self.new_location and len(self.new_location) > 255:
+            raise ValidationError('A localização não pode ter mais que 255 caracteres')
             
     def get_change_description(self):
         if self.action == 'moved':
