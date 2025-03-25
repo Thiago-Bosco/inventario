@@ -32,11 +32,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '*',
-    '62cfeebe-a3b7-41c4-90b2-a2ac4b9bf219-00-1dpj16lcxguww.kirk.replit.dev'
+    'adf8b2e5-1f9a-48d7-a603-8de8ed09a7ca-00-vpldmq947zqv.picard.replit.dev'
 ]  # Allow all hosts in development
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://62cfeebe-a3b7-41c4-90b2-a2ac4b9bf219-00-1dpj16lcxguww.kirk.replit.dev'
+    'https://adf8b2e5-1f9a-48d7-a603-8de8ed09a7ca-00-vpldmq947zqv.picard.replit.dev'
 ]
 
 
@@ -93,7 +93,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
