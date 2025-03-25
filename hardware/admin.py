@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from django.contrib import messages
 from .models import Hardware, AccessLog, Inventory, InventoryHistory
@@ -148,13 +147,17 @@ admin.site.register(Inventory, InventoryAdmin)
 admin.site.register(Hardware, HardwareAdmin)
 admin.site.register(AccessLog, AccessLogAdmin)
 
+@admin.register(InventoryHistory)
 class InventoryHistoryAdmin(admin.ModelAdmin):
     list_display = ('inventory', 'action_display', 'user', 'responsible_person', 'location_changes', 'quantity_changes', 'created_at')
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
-    search_fields = ['inventory__name', 'responsible_person', 'notes']
+    search_fields = ['inventory__name', 'responsible_person', 'notes', 'old_location', 'new_location']
     list_filter = ['action', 'created_at', 'user']
     readonly_fields = ['created_at', 'user']
+    list_per_page = 20
+    save_on_top = True
+
     fieldsets = (
         ('Informações Básicas', {
             'fields': ('inventory', 'action', 'responsible_person')
@@ -176,7 +179,7 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         })
     )
-    
+
     def quantity_changes(self, obj):
         if obj.old_quantity is not None and obj.new_quantity is not None:
             return f"{obj.old_quantity} → {obj.new_quantity}"
@@ -186,15 +189,13 @@ class InventoryHistoryAdmin(admin.ModelAdmin):
     search_fields = ('inventory__name', 'notes', 'responsible_person', 'old_location', 'new_location')
     autocomplete_fields = ['inventory']
     readonly_fields = ('created_at', 'user')
-    
+
     def action_display(self, obj):
         return obj.get_action_display()
     action_display.short_description = 'Ação'
-    
+
     def location_changes(self, obj):
         if obj.old_location and obj.new_location:
             return f"{obj.old_location} → {obj.new_location}"
         return "-"
     location_changes.short_description = 'Mudança de Local'
-
-admin.site.register(InventoryHistory, InventoryHistoryAdmin)
