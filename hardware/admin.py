@@ -105,10 +105,11 @@ class InventoryAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
     def formatted_quantity(self, obj):
-        html = f"{obj.quantity} un."
+        base_html = "{} un."
         if obj.is_low_stock():
-            html = f'<span style="color: red;">{html}</span>'
-        return format_html(html)
+            return format_html('<span style="color: red;">{}</span>', 
+                             base_html.format(obj.quantity))
+        return format_html(base_html, obj.quantity)
     formatted_quantity.short_description = "Quantidade"
 
     def formatted_price(self, obj):
