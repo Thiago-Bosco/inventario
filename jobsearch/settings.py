@@ -103,6 +103,15 @@ JAZZMIN_SETTINGS = {
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
+    'rest_framework',
+    'drf_yasg',
+    'debug_toolbar',
+    'corsheaders',
+    'django_celery_beat',
+    'django.contrib.sitemaps',
+    'django_filters',
+    'import_export',
+    'channels',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -117,6 +126,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'axes.middleware.AxesMiddleware',
     'django.middleware.common.CommonMiddleware',
     
     'django.contrib.auth.middleware.AuthenticationMiddleware',
