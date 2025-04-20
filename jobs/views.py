@@ -176,11 +176,22 @@ def dashboard(request):
     jobs_aguardando = Job.objects.filter(status='Aguardando').count()
     jobs_falhas = Job.objects.filter(status='Falha').count()
 
+    # Get total jobs count
+    total_jobs = Job.objects.count()
+    # Get total users
+    total_users = User.objects.count()
+    # Get currently logged in users (users with active sessions)
+    from django.contrib.sessions.models import Session
+    from django.utils import timezone
+    active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
+    users_logged_in = len([s for s in active_sessions])
+
     context = {
         'total_users': total_users,
         'total_servidores_cc': total_servidores_cc,
         'total_servidores_fastshop': total_servidores_fastshop,
         'total_jobs': total_jobs,
+        'users_logged_in': users_logged_in,
         'jobs_concluidos': jobs_concluidos,
         'jobs_em_progresso': jobs_em_progresso,
         'jobs_aguardando': jobs_aguardando,
