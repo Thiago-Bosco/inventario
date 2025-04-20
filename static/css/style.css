@@ -173,6 +173,35 @@ form {
 }
 
 /* Barra Lateral */
+/* Otimizações de Performance */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Melhorias Visuais */
+body {
+    background-color: #f4f6f9;
+}
+
+.content {
+    padding: 20px;
+    transition: margin-left .3s ease-in-out;
+}
+
+/* Cards Modernos */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Sidebar Aprimorada */
 .sidebar {
     height: 100%;
     width: 250px;
