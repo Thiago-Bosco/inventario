@@ -6,8 +6,17 @@ import requests
 import json
 from datetime import datetime
 from django.db.models import Q, Count
+import requests
 from hardware.models import Hardware
 from .models import Job, Servidores_CC, Servidores_FastShop
+
+def get_ping(url):
+    try:
+        response = requests.get(url, timeout=5)
+        ping_time = response.elapsed.total_seconds() * 1000
+        return f"{ping_time:.2f} ms"
+    except requests.exceptions.RequestException:
+        return "Inativo"
 
 def index(request):
     return render(request, 'index.html')
