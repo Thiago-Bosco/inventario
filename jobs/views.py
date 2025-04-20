@@ -145,43 +145,53 @@ def show_all_fastshop(request):
 
 @login_required
 def dashboard(request):
-    # Contar total de usuários e servidores
-    total_users = User.objects.count()
+    # Servidores ativos/inativos
     total_servidores_cc = Servidores_CC.objects.count()
+    servidores_cc_ativos = Servidores_CC.objects.filter(is_active=True).count()
+    servidores_cc_inativos = total_servidores_cc - servidores_cc_ativos
+    
     total_servidores_fastshop = Servidores_FastShop.objects.count()
+    servidores_fs_ativos = Servidores_FastShop.objects.filter(is_active=True).count()
+    servidores_fs_inativos = total_servidores_fastshop - servidores_fs_ativos
+
+    # Status dos Jobs
     total_jobs = Job.objects.count()
+    jobs_por_criticidade = Job.objects.values('criticality').annotate(total=Count('id'))
+    jobs_por_workstation = Job.objects.values('workstation').annotate(total=Count('id'))
+    jobs_por_aplicacao = Job.objects.values('aplicacao').annotate(total=Count('id'))
 
-    # Função para obter o tempo de ping
-    ping_times = []
-    timestamps = []
-
-    def get_ping(url):
-        try:
-            response = requests.get(url, timeout=5)
-            ping_time = response.elapsed.total_seconds() * 1000
-            ping_times.append(ping_time)
-            timestamps.append(datetime.now().strftime("%H:%M:%S"))  # Adiciona timestamp
-            return f"{ping_time:.2f} ms"
-        except requests.exceptions.RequestException:
-            return "Inativo"
+    # Hardwares
+    hardwares_por_status = Hardware.objects.values('status_contrato').annotate(total=Count('id'))
+    hardwares_alertas = Hardware.objects.exclude(alerta='unknown').count()
+    hardwares_em_manutencao = Hardware.objects.filter(status_contrato__icontains='manutencao').count()
 
     # Realizar múltiplas medições de ping
     for _ in range(10):
         get_ping("http://127.0.0.1:8000/")
 
-    # Contexto para renderização do template
+    # Contexto com dados reais
     context = {
-        'total_users': total_users,
-        'total_servidores_cc': total_servidores_cc,
-        'total_servidores_fastshop': total_servidores_fastshop,
-        'total_jobs': total_jobs,
-        'ping_result': f"{ping_times[-1]:.2f} ms" if ping_times else "Inativo",
-        'ping_times_json': json.dumps(ping_times),  # Passa tempos de ping como JSON
-        'timestamps_json': json.dumps(timestamps),  # Passa timestamps como JSON
-        'users_data': [total_users] * 10,
-        'serv_cc_data': [total_servidores_cc] * 10,
-        'serv_fastshop_data': [total_servidores_fastshop] * 10,
-        'jobs_data': [total_jobs] * 10,
+        'servidores_cc': {
+            'total': total_servidores_cc,
+            'ativos': servidores_cc_ativos,
+            'inativos': servidores_cc_inativos
+        },
+        'servidores_fastshop': {
+            'total': total_servidores_fastshop,
+            'ativos': servidores_fs_ativos,
+            'inativos': servidores_fs_inativos
+        },
+        'jobs': {
+            'total': total_jobs,
+            'por_criticidade': jobs_por_criticidade,
+            'por_workstation': jobs_por_workstation,
+            'por_aplicacao': jobs_por_aplicacao
+        },
+        'hardware': {
+            'por_status': hardwares_por_status,
+            'alertas': hardwares_alertas,
+            'em_manutencao': hardwares_em_manutencao
+        }
     }
 
     return render(request, 'jobs/dashboard.html', context)
