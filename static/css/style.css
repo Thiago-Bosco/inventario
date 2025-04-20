@@ -423,3 +423,22 @@ form {
 .navbar {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+body {
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+.MuiDrawer-paper {
+  background-color: #1a1a1a !important;
+  color: white !important;
+}
+
+.MuiListItemIcon-root {
+  color: white !important;
+}
+
+.material-icons {
+  font-size: 24px;
+}
