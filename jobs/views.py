@@ -167,7 +167,7 @@ def dashboard(request):
     # Status dos Jobs
     total_jobs = Job.objects.count()
     jobs_por_criticidade = Job.objects.values('criticality').annotate(total=Count('id'))
-    jobs_por_workstation = Job.objects.values('workstation').annotate(total=Count('id'))
+    jobs_por_workstation = Job.objects.values('estacao_trabalho').annotate(total=Count('id'))
     jobs_por_aplicacao = Job.objects.values('aplicacao').annotate(total=Count('id'))
 
     # Hardwares
