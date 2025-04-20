@@ -29,3 +29,4 @@ pytest
 pytest-django
 sentry-sdk
 weasyprint
+django-filter
