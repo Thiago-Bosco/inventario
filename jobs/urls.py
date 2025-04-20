@@ -7,6 +7,7 @@ from .views import dashboard , hardware
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('search/', views.search_jobs, name='search_jobs'),
     path('all_servers/', views.show_all_servers, name='all_servers'),
     path('all_FastShop/', views.show_all_fastshop, name='all_FastShop'),
     path('ajuda/', views.ajuda, name='ajuda'),
