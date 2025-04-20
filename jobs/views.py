@@ -1,4 +1,3 @@
-
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -9,33 +8,31 @@ from datetime import datetime
 from django.db.models import Q
 from hardware.models import Hardware
 from .models import Job, Servidores_CC, Servidores_FastShop
-
 @login_required
 def search_jobs(request):
     # Obtém a consulta de pesquisa
     search_query = request.POST.get('search_query', '').strip() if request.method == 'POST' else ''
 
     # Filtra Jobs
-    jobs = Job.objects.all() if not search_query else Job.objects.filter(
+    jobs = Job.objects.filter(
         Q(job_name__icontains=search_query) | 
-        Q(stream__icontains=search_query) | 
-        Q(workstation__icontains=search_query) |
-        Q(application__icontains=search_query)
-    )
+        Q(job_stream__icontains=search_query) | 
+        Q(workstation__icontains=search_query)
+    ) if search_query else Job.objects.none()
 
     # Filtra Servidores CC
-    servidores_cc = Servidores_CC.objects.all() if not search_query else Servidores_CC.objects.filter(
+    servidores_cc = Servidores_CC.objects.filter(
         Q(server_name__icontains=search_query) | 
         Q(server_cliente__icontains=search_query) | 
         Q(ip__icontains=search_query)
-    )
+    ) if search_query else Servidores_CC.objects.none()
 
     # Filtra Servidores FastShop
-    servidores_fastshop = Servidores_FastShop.objects.all() if not search_query else Servidores_FastShop.objects.filter(
+    servidores_fastshop = Servidores_FastShop.objects.filter(
         Q(server_name__icontains=search_query) | 
         Q(server_cliente__icontains=search_query) | 
         Q(ip__icontains=search_query)
-    )
+    ) if search_query else Servidores_FastShop.objects.none()
 
     hardware_queryset = Hardware.objects.filter(  
         Q(marca__icontains=search_query) | 
@@ -47,6 +44,8 @@ def search_jobs(request):
         Q(status_contrato__icontains=search_query) |
         Q(alerta__icontains=search_query)
     ) if search_query else Hardware.objects.none()
+
+
 
     # Mensagem se não houver resultados
     message = ""
@@ -62,25 +61,38 @@ def search_jobs(request):
         'message': message,
     })
 
+
 @login_required
 def hardware(request):
     hardware_queryset = Hardware.objects.all()
+
+
     num_display = request.GET.get('num_display', 5)
     paginator = Paginator(hardware_queryset, int(num_display))
+
     page_number = request.GET.get('page')
     hardware_page = paginator.get_page(page_number)
+
     return render(request, 'jobs/index.html', {
         'hardware': hardware_page,  
         'num_display': num_display,
     })
 
+
+
+
+
 @login_required
 def show_all_jobs(request):
     jobs = Job.objects.all()
+
+
     num_display = request.GET.get('num_display', 5)
     paginator = Paginator(jobs, int(num_display))
+
     page_number = request.GET.get('page')
     jobs_page = paginator.get_page(page_number)
+
     return render(request, 'jobs/index.html', {
         'jobs': jobs_page,
         'num_display': num_display,
@@ -89,34 +101,43 @@ def show_all_jobs(request):
 @login_required
 def show_all_servers(request):
     servidores_cc = Servidores_CC.objects.all()  
+
     num_display = request.GET.get('num_display', 5)
     paginator = Paginator(servidores_cc, int(num_display))
+
     page_number = request.GET.get('page')
     servers_page = paginator.get_page(page_number)
+
     return render(request, 'jobs/index.html', {
         'Servidores_CC': servers_page,
         'num_display': num_display,
         'jobs': [],  
         'message': "",  
-    })
-
+})
 @login_required
 def ajuda(request):
     return render(request, 'jobs/ajuda.html')
 
+
 @login_required
 def show_all_fastshop(request):
     servidores_fastshop = Servidores_FastShop.objects.all()  
+
     num_display = request.GET.get('num_display', 5)
     paginator = Paginator(servidores_fastshop, int(num_display))
+
     page_number = request.GET.get('page')
     fastshop_page = paginator.get_page(page_number)
+
     return render(request, 'jobs/index.html', {
         'Servidores_FastShop': fastshop_page,
         'num_display': num_display,
         'jobs': [],  
         'message': "",  
-    })
+ })
+
+
+
 
 @login_required
 def dashboard(request):
