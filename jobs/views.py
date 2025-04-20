@@ -170,40 +170,14 @@ def dashboard(request):
         get_ping("http://127.0.0.1:8000/")
 
     # Contexto para renderização do template
-    # Contagem de jobs por status
-    jobs_concluidos = Job.objects.filter(status='Concluído').count()
-    jobs_em_progresso = Job.objects.filter(status='Em Progresso').count()
-    jobs_aguardando = Job.objects.filter(status='Aguardando').count()
-    jobs_falhas = Job.objects.filter(status='Falha').count()
-
-    # Get total jobs count
-    total_jobs = Job.objects.count()
-    # Get jobs by status
-    jobs_concluidos = Job.objects.filter(status='Concluído').count()
-    jobs_em_progresso = Job.objects.filter(status='Em Progresso').count()
-    jobs_aguardando = Job.objects.filter(status='Aguardando').count()
-    jobs_falhas = Job.objects.filter(status='Falha').count()
-    # Get total users
-    total_users = User.objects.count()
-    # Get currently logged in users (users with active sessions)
-    from django.contrib.sessions.models import Session
-    from django.utils import timezone
-    active_sessions = Session.objects.filter(expire_date__gte=timezone.now())
-    users_logged_in = len([s for s in active_sessions])
-
     context = {
         'total_users': total_users,
         'total_servidores_cc': total_servidores_cc,
         'total_servidores_fastshop': total_servidores_fastshop,
         'total_jobs': total_jobs,
-        'users_logged_in': users_logged_in,
-        'jobs_concluidos': jobs_concluidos,
-        'jobs_em_progresso': jobs_em_progresso,
-        'jobs_aguardando': jobs_aguardando,
-        'jobs_falhas': jobs_falhas,
         'ping_result': f"{ping_times[-1]:.2f} ms" if ping_times else "Inativo",
-        'ping_times_json': json.dumps(ping_times),
-        'timestamps_json': json.dumps(timestamps),
+        'ping_times_json': json.dumps(ping_times),  # Passa tempos de ping como JSON
+        'timestamps_json': json.dumps(timestamps),  # Passa timestamps como JSON
         'users_data': [total_users] * 10,
         'serv_cc_data': [total_servidores_cc] * 10,
         'serv_fastshop_data': [total_servidores_fastshop] * 10,
