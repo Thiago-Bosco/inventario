@@ -37,8 +37,9 @@
         </nav>
 
         <main class="content flex-grow-1">
-            <header>
-		   <h1 class="mt-4 mb-4 text-center">C&C</h1>
+            <header class="page-header">
+		   <h1 class="display-4 text-center text-gradient">C&C</h1>
+                <div class="header-underline"></div>
 	    </header>
             <div class="container">
                 <form id="search-form" method="post" class="mb-4">
@@ -50,7 +51,7 @@
                         </button>
                     </div>
                 </form>
-                
+
                 <div id="server_results">
                     {% include 'jobs/server.html' %}
                     <!-- Paginação para servidores -->
@@ -95,7 +96,7 @@
                                     <a class="page-link" href="?page={{ jobs.previous_page_number }}&num_display={{ num_display }}">Anterior</a>
                                 </li>
                             {% endif %}
-                            
+
                             {% for i in jobs.paginator.page_range %}
                                 {% if i >= jobs.number|add:-2 and i <= jobs.number|add:2 %}
                                     <li class="page-item {% if jobs.number == i %}active{% endif %}">
@@ -103,7 +104,7 @@
                                     </li>
                                 {% endif %}
                             {% endfor %}
-                            
+
                             {% if jobs.has_next %}
                                 <li class="page-item">
                                     <a class="page-link" href="?page={{ jobs.next_page_number }}&num_display={{ num_display }}">Próximo</a>
