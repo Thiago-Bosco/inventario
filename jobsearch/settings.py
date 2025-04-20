@@ -36,7 +36,8 @@ ALLOWED_HOSTS = [
 ]  # Allow all hosts in development
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://b1c0bddc-ccbd-4ab4-9e9a-f79df475a673-00-oyihaunb4cvx.worf.replit.dev'
+    'https://*.replit.dev',
+    'https://*.repl.co'
 ]
 
 
@@ -118,7 +119,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
