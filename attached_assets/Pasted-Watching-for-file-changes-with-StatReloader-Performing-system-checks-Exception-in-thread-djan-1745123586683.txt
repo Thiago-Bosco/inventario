@@ -1,0 +1,30 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+Exception in thread django-main-thread:
+Traceback (most recent call last):
+  File "/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/utils/autoreload.py", line 64, in wrapper
+    fn(*args, **kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/management/commands/runserver.py", line 134, in inner_run
+    self.check(display_num_errors=True)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/management/base.py", line 563, in check
+    raise SystemCheckError(msg)
+django.core.management.base.SystemCheckError: SystemCheckError: System check identified some issues:
+
+ERRORS:
+<class 'jobs.admin.JobAdmin'>: (admin.E108) The value of 'list_display[1]' refers to 'nome_job', which is not a callable or attribute of 'JobAdmin', or an attribute, method, or field on 'jobs.Job'.
+<class 'jobs.admin.JobAdmin'>: (admin.E108) The value of 'list_display[2]' refers to 'stream_job', which is not a callable or attribute of 'JobAdmin', or an attribute, method, or field on 'jobs.Job'.
+<class 'jobs.admin.JobAdmin'>: (admin.E108) The value of 'list_display[3]' refers to 'estacao_trabalho', which is not a callable or attribute of 'JobAdmin', or an attribute, method, or field on 'jobs.Job'.
+<class 'jobs.admin.JobAdmin'>: (admin.E108) The value of 'list_display[4]' refers to 'aplicacao', which is not a callable or attribute of 'JobAdmin', or an attribute, method, or field on 'jobs.Job'.
+<class 'jobs.admin.JobAdmin'>: (admin.E108) The value of 'list_display[5]' refers to 'horario_ativacao', which is not a callable or attribute of 'JobAdmin', or an attribute, method, or field on 'jobs.Job'.
+<class 'jobs.admin.JobAdmin'>: (admin.E108) The value of 'list_display[6]' refers to 'criticidade', which is not a callable or attribute of 'JobAdmin', or an attribute, method, or field on 'jobs.Job'.
+<class 'jobs.admin.JobAdmin'>: (admin.E116) The value of 'list_filter[0]' refers to 'criticidade', which does not refer to a Field.
+<class 'jobs.admin.JobAdmin'>: (admin.E116) The value of 'list_filter[1]' refers to 'stream_job', which does not refer to a Field.
+<class 'jobs.admin.JobAdmin'>: (admin.E116) The value of 'list_filter[2]' refers to 'aplicacao', which does not refer to a Field.
+jobs.Job: (models.E015) 'ordering' refers to the nonexistent field, related field, or lookup 'nome_job'.
+
+System check identified 10 issues (0 silenced).
