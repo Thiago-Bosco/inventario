@@ -105,14 +105,14 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'rest_framework',
     'drf_yasg',
-    'debug_toolbar',
+    'debug_toolbar', 
     'corsheaders',
-    'django_celery_beat',
+    'django_celery_beat.apps.BeatConfig',
     'django.contrib.sitemaps',
     'django_filters',
     'import_export',
     'channels',
-    'axes',
+    'axes.apps.AxesConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -237,4 +237,21 @@ LOGGING = {
             'propagate': True,
         },
     },
+}
+
+# Configurações de tradução para Django Axes
+AXES_VERBOSE_NAME = "Tentativas de Acesso"
+AXES_ACCESS_FAILURE_VERBOSE_NAME = "Falhas de Acesso" 
+AXES_ACCESS_LOG_VERBOSE_NAME = "Logs de Acesso"
+
+# Configurações de tradução para Celery Beat
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+DJANGO_CELERY_BEAT_TZ_AWARE = True
+
+CELERY_BEAT_VERBOSE_NAMES = {
+    'ClockedSchedule': 'Agendamento Programado',
+    'CrontabSchedule': 'Agendamento Cron',
+    'IntervalSchedule': 'Agendamento por Intervalo', 
+    'PeriodicTask': 'Tarefas Periódicas',
+    'SolarSchedule': 'Agendamento Solar'
 }
