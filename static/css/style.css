@@ -17,19 +17,6 @@
     --cor-sombra: rgba(0, 0, 0, 0.6);
     --cor-sombra-leve: rgba(0, 0, 0, 0.4);
     --sombra-cinza: rgba(247, 246, 246, 0.212);
-    /* Estilo-Botãio-Search-bar*/
-
-    --cor-input-bg: #ffffff; /* Cor de fundo do input */
-    --cor-input-border: var(--cor-borda); /* Cor da borda do input */
-    --cor-input-focus-border: #5b9bd5; /* Cor da borda ao focar */
-    --cor-input-focus-shadow: rgba(91, 155, 213, 0.3); /* Sombra ao focar */
-    --cor-button-bg: none; /* Cor de fundo do botão */
-    --cor-button-shadow: rgba(0, 0, 0, 0.2); /* Sombra do botão */
-    --cor-button-hover: var(--cor-hover); /* Cor ao passar o mouse no botão */
-    --cor-icon-width: 20px; /* Largura do ícone */
-    --cor-icon-height: 20px; /* Altura do ícone */
-
-
 }
 
 /* Estilos Globais */
@@ -166,7 +153,7 @@ form {
     .table {
         font-size: 0.9em;
     }
-    
+
     .table th, .table td {
         padding: 8px 10px;
     }
@@ -384,42 +371,4 @@ form {
 .btn-logout:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.4);
-}
-
-
-/* New Styles */
-.search-section {
-    padding: 3rem 0;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-}
-
-.search-form {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.card {
-    transition: transform 0.2s;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.btn-group {
-    width: 100%;
-    display: flex;
-    gap: 10px;
-}
-
-.card-title {
-    color: #333;
-    font-weight: 600;
-}
-
-.navbar {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
