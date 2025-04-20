@@ -128,10 +128,9 @@
                                         >Anterior</a
                                     >
                                 </li>
-                                {% endif %} {% for i in
-                                Servidores_CC.paginator.page_range %} {% if i >=
-                                Servidores_CC.number|add:-2 and i <=
-                                Servidores_CC.number|add:2 %}
+                                {% endif %}
+                                {% for i in Servidores_CC.paginator.page_range %}
+                                {% if i >= Servidores_CC.number|add:-2 and i <= Servidores_CC.number|add:2 %}
                                 <li
                                     class="page-item {% if Servidores_CC.number == i %}active{% endif %}"
                                 >
@@ -179,9 +178,9 @@
                                         >Anterior</a
                                     >
                                 </li>
-                                {% endif %} {% for i in
-                                jobs.paginator.page_range %} {% if i >=
-                                jobs.number|add:-2 and i <= jobs.number|add:2 %}
+                                {% endif %}
+                                {% for i in jobs.paginator.page_range %}
+                                {% if i >= jobs.number|add:-2 and i <= jobs.number|add:2 %}
                                 <li
                                     class="page-item {% if jobs.number == i %}active{% endif %}"
                                 >
@@ -191,7 +190,9 @@
                                         >{{ i }}</a
                                     >
                                 </li>
-                                {% endif %} {% endfor %} {% if jobs.has_next %}
+                                {% endif %}
+                                {% endfor %}
+                                {% if jobs.has_next %}
                                 <li class="page-item">
                                     <a
                                         class="page-link"
@@ -209,8 +210,9 @@
                     <div id="hardware">{% include 'jobs/hardware.html' %}</div>
 
                     <div id="dashboard-content">
-                        {% if request.path == '/dashboard/' %} {% include
-                        'jobs/dashboard.html' %} {% endif %}
+                        {% if request.path == '/dashboard/' %}
+                        {% include 'jobs/dashboard.html' %}
+                        {% endif %}
                     </div>
                 </div>
             </main>
