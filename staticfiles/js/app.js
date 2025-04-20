@@ -6,33 +6,6 @@ const {
 
 const drawerWidth = 240;
 
-const theme = MaterialUI.createTheme({
-  palette: {
-    primary: {
-      main: '#2c3e50',
-    },
-    secondary: {
-      main: '#3498db',
-    },
-    background: {
-      default: '#f8f9fa',
-      paper: '#ffffff',
-    },
-  },
-  typography: {
-    fontFamily: "'Poppins', sans-serif",
-  },
-  shape: {
-    borderRadius: 8,
-  },
-  shadows: [
-    "none",
-    "0 2px 4px rgba(0,0,0,0.1)",
-    "0 4px 8px rgba(0,0,0,0.15)",
-    // ... outros níveis de sombra
-  ],
-});
-
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
