@@ -1,0 +1,40 @@
+NameError at /home/dashboard/
+name 'get_ping' is not defined
+Request Method:	GET
+Request URL:	http://2ac88b96-b7d1-4521-bd43-43d926e1c692-00-21edzj1qyibtq.picard.replit.dev/home/dashboard/
+Django Version:	5.1.7
+Exception Type:	NameError
+Exception Value:	
+name 'get_ping' is not defined
+Exception Location:	/home/runner/workspace/jobs/views.py, line 170, in dashboard
+Raised during:	jobs.views.dashboard
+Python Executable:	/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/bin/python
+Python Version:	3.11.9
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python311.zip',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Sat, 19 Apr 2025 23:24:59 -0300
+Traceback Switch to copy-and-paste view
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/exception.py, line 55, in inner
+                response = get_response(request)
+                               ^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/base.py, line 197, in _get_response
+                response = wrapped_callback(request, *callback_args, **callback_kwargs)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/contrib/auth/decorators.py, line 60, in _view_wrapper
+                    return view_func(request, *args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/runner/workspace/jobs/views.py, line 170, in dashboard
+        get_ping("http://127.0.0.1:8000/")
+             ^^^^^^^^ 

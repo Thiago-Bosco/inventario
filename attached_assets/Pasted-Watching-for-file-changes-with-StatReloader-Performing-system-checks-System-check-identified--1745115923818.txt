@@ -1,0 +1,46 @@
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+April 20, 2025 - 02:24:50
+Django version 5.1.7, using settings 'jobsearch.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+
+[20/Apr/2025 02:24:51] "GET / HTTP/1.1" 200 4263
+Internal Server Error: /home/dashboard/
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/jobs/views.py", line 170, in dashboard
+    get_ping("http://127.0.0.1:8000/")
+    ^^^^^^^^
+NameError: name 'get_ping' is not defined
+[20/Apr/2025 02:24:59] "GET /home/dashboard/ HTTP/1.1" 500 149090
+[20/Apr/2025 02:25:16] "POST / HTTP/1.1" 302 0
+[20/Apr/2025 02:25:16] "GET /home/ HTTP/1.1" 200 6239
+[20/Apr/2025 02:25:16] "GET /static/images/icons/discernimento.png HTTP/1.1" 304 0
+[20/Apr/2025 02:25:16] "GET /static/css/style.css HTTP/1.1" 304 0
+Internal Server Error: /home/dashboard/
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/contrib/auth/decorators.py", line 60, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/jobs/views.py", line 170, in dashboard
+    get_ping("http://127.0.0.1:8000/")
+    ^^^^^^^^
+NameError: name 'get_ping' is not defined
+[20/Apr/2025 02:25:18] "GET /home/dashboard/ HTTP/1.1" 500 149072
