@@ -131,43 +131,43 @@
         <h1 class="dashboard-title">Painel de Controle</h1>
 
         <div class="stats-container">
-            <div class="stat-card" style="background: linear-gradient(145deg, #22c55e, #166534)">
-                <i class="fas fa-server stat-icon"></i>
-                <h3>{{ servidores_ativos }}</h3>
-                <p>Servidores Ativos</p>
+            <div class="stat-card" style="background: linear-gradient(145deg, #1e3a8a, #2563eb)">
+                <i class="fas fa-users stat-icon"></i>
+                <h3>{{ total_users }}</h3>
+                <p>Usuários Ativos</p>
                 <div class="trend-indicator trend-up">
-                    <i class="fas fa-check"></i>
-                    <span>Operacionais</span>
+                    <i class="fas fa-arrow-up"></i>
+                    <span>5% desde última semana</span>
                 </div>
             </div>
 
-            <div class="stat-card" style="background: linear-gradient(145deg, #dc2626, #991b1b)">
+            <div class="stat-card" style="background: linear-gradient(145deg, #166534, #22c55e)">
                 <i class="fas fa-server stat-icon"></i>
-                <h3>{{ servidores_inativos }}</h3>
-                <p>Servidores Inativos</p>
-                <div class="trend-indicator trend-down">
-                    <i class="fas fa-times"></i>
-                    <span>Fora do ar</span>
+                <h3>{{ total_servidores_cc }}</h3>
+                <p>Servidores CC</p>
+                <div class="trend-indicator trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>3% de capacidade</span>
                 </div>
             </div>
 
-            <div class="stat-card" style="background: linear-gradient(145deg, #0ea5e9, #0369a1)">
-                <i class="fas fa-boxes stat-icon"></i>
-                <h3>{{ total_inventario }}</h3>
-                <p>Total Inventário</p>
-                <div class="trend-indicator">
-                    <i class="fas fa-database"></i>
-                    <span>Itens cadastrados</span>
+            <div class="stat-card" style="background: linear-gradient(145deg, #854d0e, #eab308)">
+                <i class="fas fa-server stat-icon"></i>
+                <h3>{{ total_servidores_fastshop }}</h3>
+                <p>Servidores FastShop</p>
+                <div class="trend-indicator trend-down">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>2% em manutenção</span>
                 </div>
             </div>
 
-            <div class="stat-card" style="background: linear-gradient(145deg, #f97316, #c2410c)">
-                <i class="fas fa-exclamation-triangle stat-icon"></i>
-                <h3>{{ garantias_expirando }}</h3>
-                <p>Garantias Expirando</p>
-                <div class="trend-indicator trend-down">
-                    <i class="fas fa-clock"></i>
-                    <span>Próximos 30 dias</span>
+            <div class="stat-card" style="background: linear-gradient(145deg, #0e7490, #06b6d4)">
+                <i class="fas fa-tasks stat-icon"></i>
+                <h3>{{ total_jobs }}</h3>
+                <p>Jobs Ativos</p>
+                <div class="trend-indicator trend-up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>98% completados</span>
                 </div>
             </div>
         </div>
