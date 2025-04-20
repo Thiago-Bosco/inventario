@@ -2,31 +2,56 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="search-section mb-5">
+    <h1 class="text-center mb-4">Sistema de Gestão</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="POST" action="{% url 'search_jobs' %}" class="search-form">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="search_query" class="form-control form-control-lg" 
+                           placeholder="Buscar jobs, servidores, hardware...">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-tasks text-primary"></i> Jobs</h5>
-                <p class="card-text">Gerencie todos os jobs do sistema.</p>
-                <a href="/admin/jobs/job/" class="btn btn-primary">Acessar Jobs</a>
+                <p class="card-text">Lista de todos os jobs ativos no sistema.</p>
+                <a href="{% url 'all_jobs' %}" class="btn btn-outline-primary">Ver Jobs</a>
             </div>
         </div>
     </div>
+    
     <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-box text-success"></i> Inventário</h5>
-                <p class="card-text">Controle o inventário de equipamentos.</p>
-                <a href="/admin/hardware/inventory/" class="btn btn-success">Acessar Inventário</a>
+                <h5 class="card-title"><i class="fas fa-server text-success"></i> Servidores</h5>
+                <p class="card-text">Servidores CC e FastShop ativos.</p>
+                <div class="btn-group">
+                    <a href="{% url 'all_servers' %}" class="btn btn-outline-success">Servidores CC</a>
+                    <a href="{% url 'all_FastShop' %}" class="btn btn-outline-success">FastShop</a>
+                </div>
             </div>
         </div>
     </div>
+
     <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
+        <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-server text-info"></i> Servidores</h5>
-                <p class="card-text">Gerencie os servidores do sistema.</p>
-                <a href="/admin/servidores/servidores_cc/" class="btn btn-info">Acessar Servidores</a>
+                <h5 class="card-title"><i class="fas fa-microchip text-info"></i> Hardware</h5>
+                <p class="card-text">Gestão de equipamentos e inventário.</p>
+                <a href="{% url 'hard' %}" class="btn btn-outline-info">Ver Hardware</a>
             </div>
         </div>
     </div>
