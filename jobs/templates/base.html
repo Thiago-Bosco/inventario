@@ -1,46 +1,68 @@
 
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestão</title>
-    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'vendor/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">Sistema de Gestão</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
-                        {% if user.is_staff %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin/"><i class="fas fa-cog"></i> Administração</a>
-                            </li>
-                        {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Sair</a>
-                        </li>
-                    {% endif %}
-                </ul>
+<body class="bg-dark">
+    <div class="d-flex">
+        <nav class="sidebar shadow-lg" id="sidebar">
+            <div class="sidebar-header text-center p-4">
+                <h3 class="text-light">Sistema de Gestão</h3>
             </div>
-        </div>
-    </nav>
+            <ul class="sidebar-menu">
+                <li><a href="{% url 'search_jobs' %}" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="{% url 'admin:index' %}" class="nav-link"><i class="fas fa-user-cog"></i> Admin</a></li>
+                <li><a href="{% url 'all_servers' %}" class="nav-link"><i class="fas fa-server"></i> Servers C&C</a></li>
+                <li><a href="{% url 'all_FastShop' %}" class="nav-link"><i class="fas fa-server"></i> Servers Fast</a></li>
+                <li><a href="{% url 'hard' %}" class="nav-link"><i class="fas fa-microchip"></i> Hardware</a></li>
+                <li><a href="{% url 'all_jobs' %}" class="nav-link"><i class="fas fa-table"></i> TWS</a></li>
+                <li><a href="{% url 'ajuda' %}" class="nav-link"><i class="fas fa-question-circle"></i> Ajuda</li>
+            </ul>
+            <div class="sidebar-footer p-3"> 
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-block" aria-label="Logout">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </form>
+            </div>
+        </nav>
 
-    <main class="container mt-4">
-        {% block content %}
-        {% endblock %}
-    </main>
+        <main class="content flex-grow-1">
+            <header class="bg-dark shadow-sm mb-4">
+                <h1 class="display-4 text-center text-light py-4">C&C</h1>
+            </header>
+            
+            <div class="container px-4">
+                <form id="search-form" method="post" class="mb-4">
+                    {% csrf_token %}
+                    <div class="search-bar">
+                        <div class="input-group">
+                            <input type="text" name="search_query" placeholder="Buscar..." class="form-control form-control-lg" autocomplete="on">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
-    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
