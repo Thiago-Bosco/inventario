@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -94,36 +93,18 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
-        canvas {
-            max-width: 100%;
-            height: auto;
-            margin-top: 15px;
-        }
-
-        .trend-indicator {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
+        .status-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
+            margin-top: 10px;
         }
 
-        .trend-up {
-            color: #4CAF50;
-        }
-
-        .trend-down {
-            color: #f44336;
-        }
-
-        @media (max-width: 768px) {
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-
-            .charts-container {
-                grid-template-columns: 1fr;
-            }
-        }
+        .status-aguardando { background-color: var(--warning-color); }
+        .status-em-progresso { background-color: var(--info-color); }
+        .status-concluido { background-color: var(--secondary-color); }
+        .status-falha { background-color: var(--danger-color); }
     </style>
 </head>
 <body>
@@ -132,249 +113,220 @@
 
         <div class="stats-container">
             <div class="stat-card" style="background: linear-gradient(145deg, #22c55e, #166534)">
-                <i class="fas fa-server stat-icon"></i>
-                <h3>{{ servidores_ativos }}</h3>
-                <p>Servidores Ativos</p>
-                <div class="trend-indicator trend-up">
-                    <i class="fas fa-check"></i>
-                    <span>Operacionais</span>
-                </div>
-            </div>
-
-            <div class="stat-card" style="background: linear-gradient(145deg, #dc2626, #991b1b)">
-                <i class="fas fa-server stat-icon"></i>
-                <h3>{{ servidores_inativos }}</h3>
-                <p>Servidores Inativos</p>
-                <div class="trend-indicator trend-down">
-                    <i class="fas fa-times"></i>
-                    <span>Fora do ar</span>
-                </div>
+                <i class="fas fa-check-circle stat-icon"></i>
+                <h3>{{ jobs_concluidos }}</h3>
+                <p>Jobs Concluídos</p>
+                <span class="status-badge status-concluido">
+                    <i class="fas fa-check"></i> Finalizados
+                </span>
             </div>
 
             <div class="stat-card" style="background: linear-gradient(145deg, #0ea5e9, #0369a1)">
-                <i class="fas fa-boxes stat-icon"></i>
-                <h3>{{ total_inventario }}</h3>
-                <p>Total Inventário</p>
-                <div class="trend-indicator">
-                    <i class="fas fa-database"></i>
-                    <span>Itens cadastrados</span>
-                </div>
+                <i class="fas fa-sync-alt stat-icon"></i>
+                <h3>{{ jobs_em_progresso }}</h3>
+                <p>Jobs em Progresso</p>
+                <span class="status-badge status-em-progresso">
+                    <i class="fas fa-spinner fa-spin"></i> Em Andamento
+                </span>
             </div>
 
             <div class="stat-card" style="background: linear-gradient(145deg, #f97316, #c2410c)">
+                <i class="fas fa-clock stat-icon"></i>
+                <h3>{{ jobs_aguardando }}</h3>
+                <p>Jobs Aguardando</p>
+                <span class="status-badge status-aguardando">
+                    <i class="fas fa-pause"></i> Na Fila
+                </span>
+            </div>
+
+            <div class="stat-card" style="background: linear-gradient(145deg, #dc2626, #991b1b)">
                 <i class="fas fa-exclamation-triangle stat-icon"></i>
-                <h3>{{ garantias_expirando }}</h3>
-                <p>Garantias Expirando</p>
-                <div class="trend-indicator trend-down">
-                    <i class="fas fa-clock"></i>
-                    <span>Próximos 30 dias</span>
-                </div>
+                <h3>{{ jobs_falhas }}</h3>
+                <p>Jobs com Falha</p>
+                <span class="status-badge status-falha">
+                    <i class="fas fa-times"></i> Erros
+                </span>
             </div>
 
             <div class="stat-card" style="background: linear-gradient(145deg, #8b5cf6, #6d28d9)">
-                <i class="fas fa-tasks stat-icon"></i>
-                <h3>{{ total_jobs }}</h3>
-                <p>Total de Jobs</p>
-                <div class="trend-indicator">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Jobs Registrados</span>
-                </div>
-            </div>
-
-            <div class="stat-card" style="background: linear-gradient(145deg, #ec4899, #be185d)">
                 <i class="fas fa-users stat-icon"></i>
                 <h3>{{ total_users }}</h3>
-                <p>Total de Usuários</p>
-                <div class="trend-indicator">
-                    <i class="fas fa-user-plus"></i>
-                    <span>Usuários Cadastrados</span>
-                </div>
+                <p>Usuários Ativos</p>
+                <span class="status-badge" style="background: #6d28d9">
+                    <i class="fas fa-user-check"></i> Online
+                </span>
             </div>
 
             <div class="stat-card" style="background: linear-gradient(145deg, #14b8a6, #0d9488)">
-                <i class="fas fa-user-check stat-icon"></i>
-                <h3>{{ users_logged_in }}</h3>
-                <p>Usuários Online</p>
-                <div class="trend-indicator">
-                    <i class="fas fa-signal"></i>
-                    <span>Ativos no Momento</span>
-                </div>
+                <i class="fas fa-server stat-icon"></i>
+                <h3>{{ total_servidores_cc }}</h3>
+                <p>Servidores CC</p>
+                <span class="status-badge" style="background: #0d9488">
+                    <i class="fas fa-signal"></i> Ativos
+                </span>
             </div>
         </div>
 
         <div class="charts-container">
             <div class="chart-card">
-                <h3>Performance dos Servidores</h3>
-                <canvas id="performanceChart"></canvas>
-            </div>
-
-            <div class="chart-card">
-                <h3>Status dos Jobs</h3>
+                <h3>Distribuição de Jobs</h3>
                 <canvas id="jobsChart"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3>Uso de Recursos</h3>
-                <canvas id="resourceChart"></canvas>
+                <h3>Status dos Servidores</h3>
+                <canvas id="serversChart"></canvas>
             </div>
 
             <div class="chart-card">
-                <h3>Tendências de Tráfego</h3>
-                <canvas id="trafficChart"></canvas>
+                <h3>Histórico de Jobs</h3>
+                <canvas id="jobsHistoryChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3>Atividade do Sistema</h3>
+                <canvas id="systemActivityChart"></canvas>
             </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-    // Dados para os gráficos
-    const performanceData = {
-        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-        datasets: [{
-            label: 'CPU',
-            data: [65, 59, 80, 81, 56, 55],
-            borderColor: '#4CAF50',
-            tension: 0.4,
-            fill: false
-        }, {
-            label: 'Memória',
-            data: [28, 48, 40, 19, 86, 27],
-            borderColor: '#2196F3',
-            tension: 0.4,
-            fill: false
-        }]
-    };
-
-    // Obter dados de status dos jobs
-    const jobsCount = {
-        concluidos: {{ jobs_concluidos|default:0 }},
-        em_progresso: {{ jobs_em_progresso|default:0 }},
-        aguardando: {{ jobs_aguardando|default:0 }},
-        falhas: {{ jobs_falhas|default:0 }}
-    };
-
-    const jobsData = {
-        labels: ['Concluídos', 'Em Progresso', 'Aguardando', 'Falhas'],
-        datasets: [{
-            data: [
-                jobsCount.concluidos,
-                jobsCount.em_progresso, 
-                jobsCount.aguardando,
-                jobsCount.falhas
-            ],
-            backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#F44336']
-        }]
-    };
-
-    const resourceData = {
-        labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-        datasets: [{
-            label: 'Uso de Recursos (%)',
-            data: [45, 59, 80, 81, 56, 55],
-            fill: true,
-            backgroundColor: 'rgba(33, 150, 243, 0.2)',
-            borderColor: '#2196F3',
-            tension: 0.4
-        }]
-    };
-
-    const trafficData = {
-        labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
-        datasets: [{
-            label: 'Tráfego de Rede',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: 'rgba(76, 175, 80, 0.2)',
-            borderColor: '#4CAF50',
-            tension: 0.4,
-            fill: true
-        }]
-    };
-
-    // Configurações comuns
-    const commonOptions = {
-        responsive: true,
-        plugins: {
-            legend: {
-                labels: {
-                    color: '#fff'
-                }
-            }
-        },
-        scales: {
-            x: { 
-                grid: {
-                    color: 'rgba(255,255,255,0.1)'
-                },
-                ticks: {
-                    color: '#fff'
-                }
+        // Gráfico de distribuição de Jobs
+        new Chart(document.getElementById('jobsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Concluídos', 'Em Progresso', 'Aguardando', 'Falhas'],
+                datasets: [{
+                    data: [
+                        {{ jobs_concluidos }},
+                        {{ jobs_em_progresso }},
+                        {{ jobs_aguardando }},
+                        {{ jobs_falhas }}
+                    ],
+                    backgroundColor: ['#4CAF50', '#00bcd4', '#ff9800', '#f44336']
+                }]
             },
-            y: { 
-                grid: {
-                    color: 'rgba(255,255,255,0.1)'
-                },
-                ticks: {
-                    color: '#fff'
-                }
-            }
-        }
-    };
-
-    // Criar os gráficos
-    new Chart(document.getElementById('performanceChart'), {
-        type: 'line',
-        data: performanceData,
-        options: commonOptions
-    });
-
-    new Chart(document.getElementById('jobsChart'), {
-        type: 'doughnut',
-        data: jobsData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#fff'
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#fff' }
                     }
                 }
             }
-        }
-    });
+        });
 
-    new Chart(document.getElementById('resourceChart'), {
-        type: 'line',
-        data: resourceData,
-        options: commonOptions
-    });
+        // Gráfico de Status dos Servidores
+        new Chart(document.getElementById('serversChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Total', 'Ativos', 'Inativos'],
+                datasets: [{
+                    label: 'Servidores',
+                    data: [
+                        {{ total_servidores_cc }},
+                        {{ total_servidores_cc }},
+                        0
+                    ],
+                    backgroundColor: ['#8b5cf6', '#4CAF50', '#f44336']
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    },
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff' }
+                    }
+                }
+            }
+        });
 
-    new Chart(document.getElementById('trafficChart'), {
-        type: 'line',
-        data: trafficData,
-        options: commonOptions
-    });
+        // Gráfico de Histórico de Jobs (simulado)
+        new Chart(document.getElementById('jobsHistoryChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Jobs Processados',
+                    data: [65, 59, 80, 81, 56, 55],
+                    borderColor: '#4CAF50',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    },
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff' }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Atividade do Sistema
+        new Chart(document.getElementById('systemActivityChart'), {
+            type: 'line',
+            data: {
+                labels: Array.from({length: 24}, (_, i) => `${i}h`),
+                datasets: [{
+                    label: 'CPU (%)',
+                    data: Array.from({length: 24}, () => Math.floor(Math.random() * 100)),
+                    borderColor: '#00bcd4',
+                    tension: 0.4,
+                    fill: false
+                }, {
+                    label: 'Memória (%)',
+                    data: Array.from({length: 24}, () => Math.floor(Math.random() * 100)),
+                    borderColor: '#ff9800',
+                    tension: 0.4,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    },
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        ticks: { color: '#fff' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff' }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title">Status dos Processos</h3>
-      </div>
-      <div class="card-body">
-        <div class="status-indicators">
-          <span class="badge badge-warning">Aguardando</span> - Processo está na fila, aguardando início
-          <br>
-          <span class="badge badge-danger">Falha</span> - Processo encontrou um erro ou falhou
-          <br> 
-          <span class="badge badge-info">Em Processo</span> - Processo está em execução
-          <br>
-          <span class="badge badge-success">Concluído</span> - Processo finalizado com sucesso
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
