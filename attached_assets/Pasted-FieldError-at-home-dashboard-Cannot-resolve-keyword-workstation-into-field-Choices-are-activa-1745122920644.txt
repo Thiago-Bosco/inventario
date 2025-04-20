@@ -1,0 +1,48 @@
+FieldError at /home/dashboard/
+Cannot resolve keyword 'workstation' into field. Choices are: activation_time, aplicacao, criticality, criticidade, descricao, estacao_trabalho, first_responsible, horario_ativacao, id, nome_job, responsavel_primario, responsavel_secundario, responsavel_terciario, second_responsible, stream_job, third_responsible
+Request Method:	GET
+Request URL:	http://2ea3ba93-c53c-44d6-a9e6-c0fd6c6d0fbf-00-2v5kqj0i5s7dl.kirk.replit.dev/home/dashboard/
+Django Version:	5.1.7
+Exception Type:	FieldError
+Exception Value:	
+Cannot resolve keyword 'workstation' into field. Choices are: activation_time, aplicacao, criticality, criticidade, descricao, estacao_trabalho, first_responsible, horario_ativacao, id, nome_job, responsavel_primario, responsavel_secundario, responsavel_terciario, second_responsible, stream_job, third_responsible
+Exception Location:	/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/db/models/sql/query.py, line 2223, in add_fields
+Raised during:	jobs.views.dashboard
+Python Executable:	/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/bin/python
+Python Version:	3.11.9
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python311.zip',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Sun, 20 Apr 2025 01:21:52 -0300
+Traceback Switch to copy-and-paste view
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/db/models/sql/query.py, line 2195, in add_fields
+                join_info = self.setup_joins(
+                                   …
+Local vars
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/db/models/sql/query.py, line 1863, in setup_joins
+                path, final_field, targets, rest = self.names_to_path(
+                                                          …
+Local vars
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/db/models/sql/query.py, line 1768, in names_to_path
+                    raise FieldError(
+                          ^ …
+Local vars
+During handling of the above exception (Cannot resolve keyword 'workstation' into field. Choices are: activation_time, aplicacao, criticality, criticidade, descricao, estacao_trabalho, first_responsible, horario_ativacao, id, nome_job, responsavel_primario, responsavel_secundario, responsavel_terciario, second_responsible, stream_job, third_responsible), another exception occurred:
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/exception.py, line 55, in inner
+                response = get_response(request)
+                               ^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/core/handlers/base.py, line 197, in _get_response
+                response = wrapped_callback(request, *callback_args, **callback_kwargs)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ …
+Local vars
+/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/contrib/auth/decorators.py, line 60, in _view_wrapper
+                    return view_func(request, *args, **kwargs)
