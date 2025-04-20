@@ -217,10 +217,23 @@
         }]
     };
 
+    // Obter dados de status dos jobs
+    const jobsCount = {
+        concluidos: {{ jobs_concluidos|default:0 }},
+        em_progresso: {{ jobs_em_progresso|default:0 }},
+        aguardando: {{ jobs_aguardando|default:0 }},
+        falhas: {{ jobs_falhas|default:0 }}
+    };
+
     const jobsData = {
         labels: ['Concluídos', 'Em Progresso', 'Aguardando', 'Falhas'],
         datasets: [{
-            data: [300, 50, 100, 20],
+            data: [
+                jobsCount.concluidos,
+                jobsCount.em_progresso, 
+                jobsCount.aguardando,
+                jobsCount.falhas
+            ],
             backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#F44336']
         }]
     };
