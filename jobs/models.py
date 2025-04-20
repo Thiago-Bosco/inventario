@@ -4,16 +4,16 @@ class Job(models.Model):
     """
     Modelo para gerenciamento de jobs/tarefas.
     """
-    nome_job = models.CharField('Nome do Job', max_length=255, blank=True)
-    stream_job = models.CharField('Stream', max_length=255, blank=True, null=True)
-    estacao_trabalho = models.CharField('Estação de Trabalho', max_length=255, blank=True, null=True)
-    aplicacao = models.CharField('Aplicação', max_length=255, blank=True, null=True)
-    responsavel_primario = models.CharField('Responsável Primário', max_length=255, blank=True, null=True)
-    responsavel_secundario = models.CharField('Responsável Secundário', max_length=255, blank=True, null=True)
-    responsavel_terciario = models.CharField('Responsável Terciário', max_length=255, blank=True, null=True)
-    horario_ativacao = models.CharField('Horário de Ativação', max_length=255, blank=True, null=True)
-    criticidade = models.CharField('Criticidade', max_length=255, blank=True, null=True)
-    descricao = models.TextField('Descrição', blank=True, null=True)
+    job_name = models.CharField('Nome do Job', max_length=255, blank=True)
+    stream = models.CharField('Stream', max_length=255, blank=True, null=True) 
+    workstation = models.CharField('Estação de Trabalho', max_length=255, blank=True, null=True)
+    application = models.CharField('Aplicação', max_length=255, blank=True, null=True)
+    primary_responsible = models.CharField('Responsável Primário', max_length=255, blank=True, null=True)
+    secondary_responsible = models.CharField('Responsável Secundário', max_length=255, blank=True, null=True)
+    tertiary_responsible = models.CharField('Responsável Terciário', max_length=255, blank=True, null=True)
+    activation_time = models.CharField('Horário de Ativação', max_length=255, blank=True, null=True)
+    criticality = models.CharField('Criticidade', max_length=255, blank=True, null=True)
+    description = models.TextField('Descrição', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Job'
