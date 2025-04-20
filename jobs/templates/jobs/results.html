@@ -7,8 +7,8 @@
         <tbody>
             {% for job in jobs %}
                 <tr class="{% if forloop.counter|divisibleby:2 %}even-row{% else %}odd-row{% endif %}">
-                    <td><strong>Nome do Job :</strong></td>
-                    <td>{{ job.job_name }}</td>
+                    <td><strong>Nome do Job:</strong></td>
+                    <td>{{ job.nome_job }}</td>
                 </tr>
                 <tr class="{% if forloop.counter|divisibleby:2 %}even-row{% else %}odd-row{% endif %}">
                     <td><strong>JOB STREAM :</strong></td>
