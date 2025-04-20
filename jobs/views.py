@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 import requests  
 import json
 from datetime import datetime
-from django.db.models import Q
+from django.db.models import Q, Count
 from hardware.models import Hardware
 from .models import Job, Servidores_CC, Servidores_FastShop
 
