@@ -1,0 +1,39 @@
+OperationalError at /home/
+no such column: jobs_job.stream
+Request Method:	GET
+Request URL:	http://2ea3ba93-c53c-44d6-a9e6-c0fd6c6d0fbf-00-2v5kqj0i5s7dl.kirk.replit.dev/home/
+Django Version:	5.1.7
+Exception Type:	OperationalError
+Exception Value:	
+no such column: jobs_job.stream
+Exception Location:	/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/db/backends/sqlite3/base.py, line 354, in execute
+Raised during:	jobs.views.search_jobs
+Python Executable:	/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/bin/python
+Python Version:	3.11.9
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python311.zip',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Sun, 20 Apr 2025 01:33:58 -0300
+Error during template rendering
+In template /home/runner/workspace/jobs/templates/jobs/results.html, error at line 1
+
+no such column: jobs_job.stream
+1	{% if jobs %}
+2	    <table class="table table-striped table-bordered">
+3	        <thead>
+4	            <tr>
+5	            </tr>
+6	        </thead>
+7	        <tbody>
+8	            {% for job in jobs %}
+9	                <tr class="{% if forloop.counter|divisibleby:2 %}even-row{% else %}odd-row{% endif %}">
+10	                    <td><strong>Nome do Job:</strong></td>
+11	                    <td>{{ job.job_name }}</td>
