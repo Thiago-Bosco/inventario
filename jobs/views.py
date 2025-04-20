@@ -17,10 +17,10 @@ def search_jobs(request):
 
     # Filtra Jobs
     jobs = Job.objects.all() if not search_query else Job.objects.filter(
-        Q(nome_job__icontains=search_query) | 
-        Q(stream_job__icontains=search_query) | 
-        Q(estacao_trabalho__icontains=search_query) |
-        Q(aplicacao__icontains=search_query)
+        Q(job_name__icontains=search_query) | 
+        Q(stream__icontains=search_query) | 
+        Q(workstation__icontains=search_query) |
+        Q(application__icontains=search_query)
     )
 
     # Filtra Servidores CC
