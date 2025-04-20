@@ -18,7 +18,7 @@ class Job(models.Model):
     class Meta:
         verbose_name = 'Job'
         verbose_name_plural = 'Jobs'
-        ordering = ['nome_job']
+        ordering = ['job_name']
 
     def __str__(self):
         return self.nome_job or "Job sem nome"

@@ -3,12 +3,12 @@ from django.contrib import admin
 from .models import Job
 
 class JobAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nome_job', 'stream_job', 'estacao_trabalho', 'aplicacao', 'horario_ativacao', 'criticidade', 'descricao')
-    search_fields = ('id', 'nome_job', 'stream_job', 'aplicacao', 'responsavel_primario', 'descricao')
-    list_filter = ('criticidade', 'stream_job', 'aplicacao')
-    list_display_links = ('id', 'nome_job')
+    list_display = ('id', 'job_name', 'stream', 'workstation', 'application', 'activation_time', 'criticality', 'description')
+    search_fields = ('id', 'job_name', 'stream', 'application', 'primary_responsible', 'description')
+    list_filter = ('criticality', 'stream', 'application')
+    list_display_links = ('id', 'job_name')
 
-    fields = ('nome_job', 'stream_job', 'estacao_trabalho', 'aplicacao', 'horario_ativacao', 'responsavel_primario', 'responsavel_secundario', 'responsavel_terciario', 'criticidade', 'descricao')
+    fields = ('job_name', 'stream', 'workstation', 'application', 'activation_time', 'primary_responsible', 'secondary_responsible', 'tertiary_responsible', 'criticality', 'description')
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
