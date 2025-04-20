@@ -103,16 +103,6 @@ JAZZMIN_SETTINGS = {
 INSTALLED_APPS = [
     'jazzmin',
     'django.contrib.admin',
-    'rest_framework',
-    'drf_yasg',
-    'debug_toolbar', 
-    'corsheaders',
-    'django_celery_beat.apps.BeatConfig',
-    'django.contrib.sitemaps',
-    'django_filters',
-    'import_export',
-    'channels',
-    'axes',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -127,14 +117,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-    'axes.middleware.AxesMiddleware',
-    'django.middleware.common.CommonMiddleware',
-
+    
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -237,21 +221,4 @@ LOGGING = {
             'propagate': True,
         },
     },
-}
-
-# Configurações de tradução para Django Axes
-AXES_VERBOSE_NAME = "Tentativas de Acesso"
-AXES_ACCESS_FAILURE_VERBOSE_NAME = "Falhas de Acesso" 
-AXES_ACCESS_LOG_VERBOSE_NAME = "Logs de Acesso"
-
-# Configurações de tradução para Celery Beat
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
-DJANGO_CELERY_BEAT_TZ_AWARE = True
-
-CELERY_BEAT_VERBOSE_NAMES = {
-    'ClockedSchedule': 'Agendamento Programado',
-    'CrontabSchedule': 'Agendamento Cron',
-    'IntervalSchedule': 'Agendamento por Intervalo', 
-    'PeriodicTask': 'Tarefas Periódicas',
-    'SolarSchedule': 'Agendamento Solar'
 }
