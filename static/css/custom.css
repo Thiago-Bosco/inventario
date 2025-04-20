@@ -1,4 +1,36 @@
 
+/* Estilos personalizados para a home */
+.search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.search-bar input {
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+}
+
+.content-header {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
 /* Custom styles for improved appearance */
 .main-header {
   background: linear-gradient(135deg, #2c3e50, #3498db);
