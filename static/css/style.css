@@ -1,15 +1,97 @@
 /* Variáveis Globais */
 :root {
-    --cor-fundo: #1a1a1a;
-    --cor-texto-principal: #ffffff;
-    --cor-primaria: #3498db;
-    --cor-secundaria: #2ecc71;
-    --cor-destaque: #e74c3c;
+    /* Cores principais */
+    --cor-primaria: #2c3e50;
+    --cor-secundaria: #34495e;
+    --cor-destaque: #3498db;
+    --cor-sucesso: #2ecc71;
+    --cor-alerta: #f1c40f;
+    --cor-erro: #e74c3c;
+
+    /* Tons de cinza */
+    --cor-fundo: #f8f9fa;
+    --cor-fundo-escuro: #1a1a1a;
+    --cor-texto-principal: #2c3e50;
+    --cor-texto-secundario: #7f8c8d;
+    --cor-borda: #ecf0f1;
+
+    /* Efeitos */
     --cor-hover: #2980b9;
-    --sombra-padrao: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --cor-texto-secundario: #b0b0b0;
-    --cor-hover: #001117;
-    --cor-borda: #d0e3f0;
+    --sombra-padrao: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --sombra-hover: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --transicao: all 0.3s ease;
+
+    /* Gradientes */
+    --gradiente-primario: linear-gradient(135deg, #2c3e50, #3498db);
+    --gradiente-secundario: linear-gradient(135deg, #2ecc71, #27ae60);
+    
+    /* Bordas arredondadas */
+    --borda-raio: 8px;
+    --borda-raio-lg: 12px;
+    --borda-raio-sm: 4px;
+}
+
+/* Atualização dos estilos base */
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+}
+
+.sidebar {
+    background: var(--gradiente-primario);
+    box-shadow: var(--sombra-padrao);
+    border-radius: 0 var(--borda-raio) var(--borda-raio) 0;
+}
+
+.navbar {
+    background: var(--cor-fundo);
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.card {
+    background: white;
+    border-radius: var(--borda-raio);
+    box-shadow: var(--sombra-padrao);
+    transition: var(--transicao);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-hover);
+}
+
+.btn-primary {
+    background: var(--gradiente-primario);
+    border: none;
+    border-radius: var(--borda-raio);
+    transition: var(--transicao);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+.table {
+    background: white;
+    border-radius: var(--borda-raio);
+    overflow: hidden;
+}
+
+.table th {
+    background: var(--cor-primaria);
+    color: white;
+}
+
+.table tr:nth-child(even) {
+    background: var(--cor-fundo);
+}
+
+.table tr:hover {
+    background: var(--cor-borda);
+}
     --cor-botao: #026ac0;
     --cor-botao-hover: #001117;
     --cor-erro: #dc3545;
