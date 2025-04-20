@@ -1,7 +1,12 @@
 /* Variáveis Globais */
 :root {
-    --cor-fundo: #001117;
-    --cor-texto-principal: #e0e0e0;
+    --cor-fundo: #1a1a1a;
+    --cor-texto-principal: #ffffff;
+    --cor-primaria: #3498db;
+    --cor-secundaria: #2ecc71;
+    --cor-destaque: #e74c3c;
+    --cor-hover: #2980b9;
+    --sombra-padrao: 0 4px 6px rgba(0, 0, 0, 0.1);
     --cor-texto-secundario: #b0b0b0;
     --cor-hover: #001117;
     --cor-borda: #d0e3f0;
