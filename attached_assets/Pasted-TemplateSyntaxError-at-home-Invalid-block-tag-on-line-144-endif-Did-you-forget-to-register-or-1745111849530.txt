@@ -1,0 +1,48 @@
+TemplateSyntaxError at /home/
+Invalid block tag on line 144: 'endif'. Did you forget to register or load this tag?
+Request Method:	GET
+Request URL:	http://3762d69f-7fd2-40e3-ae56-ed682f99b0c1-00-13z606jq6g6sd.worf.replit.dev/home/
+Django Version:	5.1.7
+Exception Type:	TemplateSyntaxError
+Exception Value:	
+Invalid block tag on line 144: 'endif'. Did you forget to register or load this tag?
+Exception Location:	/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/template/base.py, line 573, in invalid_block_tag
+Raised during:	jobs.views.index
+Python Executable:	/home/runner/workspace/.pythonlibs/bin/python
+Python Version:	3.12.7
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python312.zip',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/nb21sc3npfc8gvazwnrjxpvb5d48jysx-python3-3.12.7/lib/python3.12/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Sat, 19 Apr 2025 22:17:15 -0300
+Error during template rendering
+In template /home/runner/workspace/jobs/templates/index.html, error at line 144
+
+Invalid block tag on line 144: 'endif'. Did you forget to register or load this tag?
+134	                                Servidores_CC.number|add:2 %}
+135	                                <li
+136	                                    class="page-item {% if Servidores_CC.number == i %}active{% endif %}"
+137	                                >
+138	                                    <a
+139	                                        class="page-link"
+140	                                        href="?page={{ i }}&num_display={{ num_display }}"
+141	                                        >{{ i }}</a
+142	                                    >
+143	                                </li>
+144	                                {% endif %} {% endfor %} {% if
+145	                                Servidores_CC.has_next %}
+146	                                <li class="page-item">
+147	                                    <a
+148	                                        class="page-link"
+149	                                        href="?page={{ Servidores_CC.next_page_number }}&num_display={{ num_display }}"
+150	                                        >Próximo</a
+151	                                    >
+152	                                </li>
+153	                                {% endif %}
