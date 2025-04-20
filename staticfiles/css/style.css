@@ -1,7 +1,12 @@
 /* Variáveis Globais */
 :root {
-    --cor-fundo: #001117;
-    --cor-texto-principal: #e0e0e0;
+    --cor-fundo: #1a1a1a;
+    --cor-texto-principal: #ffffff;
+    --cor-primaria: #3498db;
+    --cor-secundaria: #2ecc71;
+    --cor-destaque: #e74c3c;
+    --cor-hover: #2980b9;
+    --sombra-padrao: 0 4px 6px rgba(0, 0, 0, 0.1);
     --cor-texto-secundario: #b0b0b0;
     --cor-hover: #001117;
     --cor-borda: #d0e3f0;
@@ -168,6 +173,35 @@ form {
 }
 
 /* Barra Lateral */
+/* Otimizações de Performance */
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Melhorias Visuais */
+body {
+    background-color: #f4f6f9;
+}
+
+.content {
+    padding: 20px;
+    transition: margin-left .3s ease-in-out;
+}
+
+/* Cards Modernos */
+.card {
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Sidebar Aprimorada */
 .sidebar {
     height: 100%;
     width: 250px;
@@ -293,19 +327,29 @@ form {
     display: flex;
     align-items: center;
     max-width: 900px;
-    margin: 10px auto;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .search-bar input {
     width: 100%;
     border-radius: 25px;
-    padding: 12px 20px;
+    padding: 15px 25px;
     font-size: 16px;
-    border: 1px solid var(--cor-input-border);
+    border: 2px solid transparent;
     background-color: var(--cor-input-bg);
     color: var(--cor-fundo);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--cor-botao);
+    box-shadow: 0 0 15px rgba(2, 106, 192, 0.3);
+    transform: translateY(-2px);
 }
 
 .search-bar input:focus {
@@ -316,14 +360,23 @@ form {
 
 .search-bar button {
     border: none;
-    background: var(--cor-button-bg);
+    background: var(--cor-botao);
     cursor: pointer;
     position: absolute;
-    right: 15px;
-    padding: 8px;
+    right: 8px;
+    padding: 12px;
     border-radius: 50%;
-    transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px var(--cor-button-shadow);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(2, 106, 192, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar button:hover {
+    background: var(--cor-botao-hover);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(2, 106, 192, 0.4);
 }
 
 .search-bar button:hover {
@@ -384,20 +437,69 @@ form {
 
 /* New Styles */
 .search-section {
-    padding: 3rem 0;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border-radius: 15px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .search-form {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .card {
-    transition: transform 0.2s;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    background-color: #2a2a2a;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.row {
+    margin: 2rem -15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.col-md-4 {
+    flex: 0 0 calc(33.333% - 1.5rem);
+    max-width: calc(33.333% - 1.5rem);
 }
 
 .card:hover {
