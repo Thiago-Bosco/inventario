@@ -28,10 +28,9 @@ def search_jobs(request):
 
     # Filtra Jobs
     jobs = Job.objects.filter(
-        Q(nome_job__icontains=search_query) | 
-        Q(stream_job__icontains=search_query) | 
-        Q(estacao_trabalho__icontains=search_query) |
-        Q(aplicacao__icontains=search_query)
+        Q(job_name__icontains=search_query) | 
+        Q(job_stream__icontains=search_query) | 
+        Q(workstation__icontains=search_query)
     ) if search_query else Job.objects.none()
 
     # Filtra Servidores CC
