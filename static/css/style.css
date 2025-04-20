@@ -1,11 +1,11 @@
 /* Variáveis Globais */
 :root {
-    --cor-fundo: #f8f9fa;
-    --cor-texto-principal: #212529;
-    --cor-primaria: #0d6efd;
-    --cor-secundaria: #198754;
-    --cor-destaque: #dc3545;
-    --cor-hover: #0b5ed7;
+    --cor-fundo: #1a1a1a;
+    --cor-texto-principal: #ffffff;
+    --cor-primaria: #3498db;
+    --cor-secundaria: #2ecc71;
+    --cor-destaque: #e74c3c;
+    --cor-hover: #2980b9;
     --sombra-padrao: 0 4px 6px rgba(0, 0, 0, 0.1);
     --cor-texto-secundario: #b0b0b0;
     --cor-hover: #001117;
@@ -166,7 +166,7 @@ form {
     .table {
         font-size: 0.9em;
     }
-
+    
     .table th, .table td {
         padding: 8px 10px;
     }
@@ -184,7 +184,7 @@ form {
     padding-top: 20px;
     border-right: 2px solid var(--cor-fundo);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 20px var(--sombra-cinza);
     z-index: 1000;
     overflow-y: auto;
     transform: translateX(0);
@@ -251,20 +251,6 @@ form {
     margin: 0; /* Remove a margem padrão */
 }
 
-.sidebar-menu li a {
-    color: #fff;
-    padding: 10px 15px;
-    display: block;
-    transition: all 0.3s;
-    border-radius: 4px;
-}
-
-.sidebar-menu li a:hover {
-    background: rgba(255,255,255,0.1);
-    text-decoration: none;
-}
-
-
 /* Rodapé da Barra Lateral */
 .sidebar-footer {
     padding: 20px;
@@ -313,11 +299,6 @@ form {
     align-items: center;
     max-width: 900px;
     margin: 10px auto;
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
 }
 
 .search-bar input {
@@ -325,9 +306,7 @@ form {
     border-radius: 25px;
     padding: 12px 20px;
     font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 8px 15px;
+    border: 1px solid var(--cor-input-border);
     background-color: var(--cor-input-bg);
     color: var(--cor-fundo);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -448,9 +427,6 @@ form {
     display: flex;
     gap: 1rem;
     margin-top: auto;
-    width: 100%;
-    display: flex;
-    gap: 10px;
 }
 
 .btn {
@@ -482,25 +458,15 @@ form {
     transform: translateY(-5px);
 }
 
+.btn-group {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
 .card-title {
     color: #333;
     font-weight: 600;
-}
-
-.btn-primary {
-    background: #6f42c1;
-    border-color: #6f42c1;
-}
-
-.btn-primary:hover {
-    background: #583699;
-    border-color: #583699;
-}
-
-.content {
-    background: #f4f6f9;
-    min-height: 100vh;
-    padding: 20px;
 }
 
 .navbar {
