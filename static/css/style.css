@@ -1,11 +1,11 @@
 /* Variáveis Globais */
 :root {
-    --cor-fundo: #1a1a1a;
-    --cor-texto-principal: #ffffff;
-    --cor-primaria: #3498db;
-    --cor-secundaria: #2ecc71;
-    --cor-destaque: #e74c3c;
-    --cor-hover: #2980b9;
+    --cor-fundo: #f8f9fa;
+    --cor-texto-principal: #212529;
+    --cor-primaria: #0d6efd;
+    --cor-secundaria: #198754;
+    --cor-destaque: #dc3545;
+    --cor-hover: #0b5ed7;
     --sombra-padrao: 0 4px 6px rgba(0, 0, 0, 0.1);
     --cor-texto-secundario: #b0b0b0;
     --cor-hover: #001117;
@@ -179,7 +179,7 @@ form {
     position: fixed;
     top: 0;
     left: 0;
-    background: #6f42c1 linear-gradient(180deg, #855eca, #6f42c1);
+    background: #0d6efd linear-gradient(180deg, #0d6efd, #0a58ca);
     color: white; 
     padding-top: 20px;
     border-right: 2px solid var(--cor-fundo);
@@ -425,14 +425,14 @@ form {
 }
 
 .card {
-    background: #fff;
+    background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     margin-bottom: 20px;
     transition: all 0.3s;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(0,0,0,0.125);
     border-radius: 12px;
-    background-color: #2a2a2a;
+    background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     padding: 1.5rem;
     height: 100%;
