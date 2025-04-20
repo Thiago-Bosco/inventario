@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -6,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{% static 'adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  <!-- Add Bootstrap CSS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
@@ -102,7 +102,7 @@
             .stats-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .charts-container {
                 grid-template-columns: 1fr;
             }
@@ -112,27 +112,27 @@
 <body>
     <div class="wrapper">
         <h1 class="dashboard-title">Painel de Controle</h1>
-        
+
         <div class="stats-container">
-            <div class="stat-card" style="background: linear-gradient(145deg, #1e3a8a, #2563eb)">
+            <div class="stat-card" style="background: linear-gradient(145deg, #1e3a8a, #2563eb)" data-toggle="tooltip" title="Total de usuários ativos no sistema">
                 <i class="fas fa-users stat-icon"></i>
                 <h3>{{ total_users }}</h3>
                 <p>Usuários Totais</p>
             </div>
-            
-            <div class="stat-card" style="background: linear-gradient(145deg, #166534, #22c55e)">
+
+            <div class="stat-card" style="background: linear-gradient(145deg, #166534, #22c55e)" data-toggle="tooltip" title="Total de servidores CC ativos">
                 <i class="fas fa-server stat-icon"></i>
                 <h3>{{ total_servidores_cc }}</h3>
                 <p>Servidores CC Ativos</p>
             </div>
 
-            <div class="stat-card" style="background: linear-gradient(145deg, #854d0e, #eab308)">
+            <div class="stat-card" style="background: linear-gradient(145deg, #854d0e, #eab308)" data-toggle="tooltip" title="Total de servidores FastShop">
                 <i class="fas fa-server stat-icon"></i>
                 <h3>{{ total_servidores_fastshop }}</h3>
                 <p>Servidores FastShop</p>
             </div>
 
-            <div class="stat-card" style="background: linear-gradient(145deg, #0e7490, #06b6d4)">
+            <div class="stat-card" style="background: linear-gradient(145deg, #0e7490, #06b6d4)" data-toggle="tooltip" title="Total de Jobs processados">
                 <i class="fas fa-briefcase stat-icon"></i>
                 <h3>{{ total_jobs }}</h3>
                 <p>Total de Jobs</p>
@@ -144,17 +144,17 @@
                 <h3>Usuários</h3>
                 <canvas id="usersChart"></canvas>
             </div>
-            
+
             <div class="chart-card">
                 <h3>Servidores CC</h3>
                 <canvas id="servCCChart"></canvas>
             </div>
-            
+
             <div class="chart-card">
                 <h3>Servidores FastShop</h3>
                 <canvas id="servFastshopChart"></canvas>
             </div>
-            
+
             <div class="chart-card">
                 <h3>Jobs</h3>
                 <canvas id="jobsChart"></canvas>
@@ -162,6 +162,9 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  <!-- Add jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>  <!-- Add Popper.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  <!-- Add Bootstrap JS -->
     <script>
     const createChart = (ctx, labels, data, label, color) => {
         return new Chart(ctx, {
@@ -248,6 +251,9 @@
             'Jobs',
             'rgba(6, 182, 212, 1)'
         );
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
     });
     </script>
 </body>
