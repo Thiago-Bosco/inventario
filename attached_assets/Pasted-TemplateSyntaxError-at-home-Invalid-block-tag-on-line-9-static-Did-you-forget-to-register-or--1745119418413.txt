@@ -1,0 +1,47 @@
+TemplateSyntaxError at /home/
+Invalid block tag on line 9: 'static'. Did you forget to register or load this tag?
+Request Method:	GET
+Request URL:	http://2ea3ba93-c53c-44d6-a9e6-c0fd6c6d0fbf-00-2v5kqj0i5s7dl.kirk.replit.dev/home/
+Django Version:	5.1.7
+Exception Type:	TemplateSyntaxError
+Exception Value:	
+Invalid block tag on line 9: 'static'. Did you forget to register or load this tag?
+Exception Location:	/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages/django/template/base.py, line 573, in invalid_block_tag
+Raised during:	jobs.views.index
+Python Executable:	/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/bin/python
+Python Version:	3.11.9
+Python Path:	
+['/home/runner/workspace',
+ '/nix/store/lc7qv2ldzrs1aq3hbyzmbgvn0h2w26pl-sitecustomize/lib/python/site-packages',
+ '/nix/store/z0gpy18cc2s8i3y31vhad6acqvcaw6c9-python3.12-pip-24.0/lib/python3.12/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python311.zip',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/lib-dynload',
+ '/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages',
+ '/nix/store/7hnr99nxrd2aw6lghybqdmkckq60j6l9-python3-3.11.9/lib/python3.11/site-packages',
+ '/home/runner/workspace/.pythonlibs/lib/python3.12/site-packages',
+ '/nix/store/h25lasfc88hing94ks429x393chr9jci-python3.12-setuptools-75.1.1/lib/python3.12/site-packages']
+Server time:	Sun, 20 Apr 2025 00:23:28 -0300
+Error during template rendering
+In template /home/runner/workspace/jobs/templates/index.html, error at line 9
+
+Invalid block tag on line 9: 'static'. Did you forget to register or load this tag?
+1	<!doctype html>
+2	<html lang="pt-br">
+3	    <head>
+4	        <meta charset="UTF-8" />
+5	        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+6	        <meta name="description" content="Sistema de Gerenciamento">
+7	        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+8	        <link rel="preconnect" href="https://fonts.gstatic.com">
+9	        <link rel="preload" href="{% static 'css/style.css' %}" as="style">
+10	        <link
+11	            rel="stylesheet"
+12	            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+13	        />
+14	        <link
+15	            rel="stylesheet"
+16	            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+17	        />
+18	        <link
+19	            rel="stylesheet"
