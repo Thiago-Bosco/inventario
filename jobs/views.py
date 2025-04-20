@@ -178,6 +178,11 @@ def dashboard(request):
 
     # Get total jobs count
     total_jobs = Job.objects.count()
+    # Get jobs by status
+    jobs_concluidos = Job.objects.filter(status='Concluído').count()
+    jobs_em_progresso = Job.objects.filter(status='Em Progresso').count()
+    jobs_aguardando = Job.objects.filter(status='Aguardando').count()
+    jobs_falhas = Job.objects.filter(status='Falha').count()
     # Get total users
     total_users = User.objects.count()
     # Get currently logged in users (users with active sessions)
@@ -197,8 +202,8 @@ def dashboard(request):
         'jobs_aguardando': jobs_aguardando,
         'jobs_falhas': jobs_falhas,
         'ping_result': f"{ping_times[-1]:.2f} ms" if ping_times else "Inativo",
-        'ping_times_json': json.dumps(ping_times),  # Passa tempos de ping como JSON
-        'timestamps_json': json.dumps(timestamps),  # Passa timestamps como JSON
+        'ping_times_json': json.dumps(ping_times),
+        'timestamps_json': json.dumps(timestamps),
         'users_data': [total_users] * 10,
         'serv_cc_data': [total_servidores_cc] * 10,
         'serv_fastshop_data': [total_servidores_fastshop] * 10,
