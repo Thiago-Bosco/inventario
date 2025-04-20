@@ -27,26 +27,26 @@ def search_jobs(request):
     search_query = request.POST.get('search_query', '').strip() if request.method == 'POST' else ''
 
     # Filtra Jobs
-    jobs = Job.objects.filter(
+    jobs = Job.objects.all() if not search_query else Job.objects.filter(
         Q(nome_job__icontains=search_query) | 
         Q(stream_job__icontains=search_query) | 
         Q(estacao_trabalho__icontains=search_query) |
         Q(aplicacao__icontains=search_query)
-    ) if search_query else Job.objects.none()
+    )
 
     # Filtra Servidores CC
-    servidores_cc = Servidores_CC.objects.filter(
+    servidores_cc = Servidores_CC.objects.all() if not search_query else Servidores_CC.objects.filter(
         Q(server_name__icontains=search_query) | 
         Q(server_cliente__icontains=search_query) | 
         Q(ip__icontains=search_query)
-    ) if search_query else Servidores_CC.objects.none()
+    )
 
     # Filtra Servidores FastShop
-    servidores_fastshop = Servidores_FastShop.objects.filter(
+    servidores_fastshop = Servidores_FastShop.objects.all() if not search_query else Servidores_FastShop.objects.filter(
         Q(server_name__icontains=search_query) | 
         Q(server_cliente__icontains=search_query) | 
         Q(ip__icontains=search_query)
-    ) if search_query else Servidores_FastShop.objects.none()
+    )
 
     hardware_queryset = Hardware.objects.filter(  
         Q(marca__icontains=search_query) | 
