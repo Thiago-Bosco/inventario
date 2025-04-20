@@ -112,7 +112,7 @@ INSTALLED_APPS = [
     'django_filters',
     'import_export',
     'channels',
-    'axes.apps.AxesConfig',
+    'axes',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
