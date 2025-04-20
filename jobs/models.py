@@ -1,6 +1,13 @@
 from django.db import models
 from servidores.models import Servidores_CC, Servidores_FastShop
 class Job(models.Model):
+    STATUS_CHOICES = [
+        ('Aguardando', 'Aguardando'),
+        ('Em Progresso', 'Em Progresso'), 
+        ('Concluído', 'Concluído'),
+        ('Falha', 'Falha'),
+    ]
+    
     job_name = models.CharField(max_length=255, blank=True)
     job_stream = models.CharField(max_length=255, blank=True, null=True)
     workstation = models.CharField(max_length=255, blank=True, null=True)
@@ -11,6 +18,7 @@ class Job(models.Model):
     activation_time = models.CharField(max_length=255, blank=True, null=True)
     criticality = models.CharField(max_length=255, blank=True, null=True)
     descricao = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Aguardando')
 
     def __str__(self):
         return self.job_name or "Nome não definido"
