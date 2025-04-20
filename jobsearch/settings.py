@@ -112,6 +112,7 @@ INSTALLED_APPS = [
     'django_filters',
     'import_export',
     'channels',
+    'axes',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -133,7 +134,7 @@ MIDDLEWARE = [
     'django.middleware.cache.FetchFromCacheMiddleware',
     'axes.middleware.AxesMiddleware',
     'django.middleware.common.CommonMiddleware',
-    
+
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
